@@ -17,11 +17,17 @@ exports.dns = function (req, res) {
     switch (pathVar) {
         case 'enable':
             mk8s.dnsSync(operation.ENABLE, function(error, data){
+                if(error!==null && error.length>0) {
+                    res.status(400);
+                }
                 res.json({error: error, data: data});
             });
             break;
         case 'disable':
             mk8s.dnsSync(operation.DISABLE, function(error, data){
+                if(error!==null && error.length>0) {
+                    res.status(400);
+                }
                 res.json({error: error, data: data});
             });
             break;
