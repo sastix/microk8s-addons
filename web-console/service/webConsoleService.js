@@ -1,6 +1,7 @@
-'user strict';
-var VERSION = "0.0.1";
+'use strict';
+
 exports.getVersion = function (req, res) {
-    console.log("version called: "+VERSION);
-    res.json({version:VERSION});
+    var c = require('../common/constants');
+    console.log("version called: "+c.APP_VERSION);
+    res.json({version:c.APP_VERSION});
 };
