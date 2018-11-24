@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
-import { serviceInfo } from '@common/models/service-info.interface.';
+import { ServiceInfo } from '@common/models/service-info.interface.';
 import { ShellService } from '../core/services/shell/shell.service';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class SnapService {
 
     constructor(private shellService: ShellService) { }
 
-    async getServices(): Promise<serviceInfo[]> {
+    async getServices(): Promise<ServiceInfo[]> {
         const parsedOutput = safeLoad(await this.shellService.execCommand('snap', ['info', 'microk8s']));
 
         const serviceInfoList = [];
@@ -22,7 +22,7 @@ export class SnapService {
         return serviceInfoList;
     }
 
-    async setServiceStatus(serviceName: string, enabled: boolean): Promise<serviceInfo[]> {
+    async setServiceStatus(serviceName: string, enabled: boolean): Promise<ServiceInfo[]> {
         await this.shellService.execCommand('sudo',  ['systemctl', enabled ? 'start' : 'stop', 'snap.' + serviceName + '.service']);
 
         return this.getServices();

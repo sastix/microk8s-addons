@@ -29,6 +29,7 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "sudo-js": "^1.0.2",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
