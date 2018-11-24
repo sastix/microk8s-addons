@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { SnapService } from "./snap.service";
-import {ServiceInfo} from "@common/models/service-info.interface.";
+import {Body, Controller, Get, Post} from '@nestjs/common';
+import { SnapService } from './snap.service';
+// import { serviceInfo } from '@common/models/service-info.interface.';
+import { ServiceInfo } from '@common/graphql.schema';
 
 @Controller('snap')
 export class SnapController {
@@ -10,6 +11,16 @@ export class SnapController {
     @Get('/info')
     async snapInfo(): Promise<ServiceInfo[]> {
        return this.snapService.getServices();
+    }
+
+    @Post('/start')
+    async startSnapService(@Body() serviceInfo: ServiceInfo): Promise<ServiceInfo[]> {
+        return this.snapService.setServiceStatus(serviceInfo.name, true);
+    }
+
+    @Post('/stop')
+    async stopSnapService(@Body() serviceInfo: ServiceInfo): Promise<ServiceInfo[]> {
+        return this.snapService.setServiceStatus(serviceInfo.name, false);
     }
 
 }

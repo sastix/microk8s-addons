@@ -8,5 +8,5 @@ type Query {
 }
 
 type Mutation {
-    setAddonStatus(name: String!, enabled: Boolean!): Addon
+    setAddonStatus(name: String!, enabled: Boolean!, password: String): Addon
 }
