@@ -8,10 +8,13 @@ import {ShellService} from "./core/services/shell/shell.service";
 import { PowerController } from './power/power.controller';
 import { PowerService } from './power/power.service';
 import { PowerModule } from './power/power.module';
+import { VersionController } from './version/version.controller';
+import { VersionModule } from './version/version.module';
+import {VersionService} from "./version/version.service";
 
 @Module({
-  imports: [AddonsModule, PowerModule],
-  controllers: [AppController, PowerController, SnapController],
-  providers: [AppService, PowerService, SnapService, ShellService],
+  imports: [AddonsModule, PowerModule, VersionModule],
+  controllers: [AppController, PowerController, SnapController, VersionController],
+  providers: [AppService, PowerService, SnapService, ShellService, VersionService],
 })
 export class AppModule {}

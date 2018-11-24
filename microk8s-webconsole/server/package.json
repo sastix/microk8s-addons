@@ -1,6 +1,6 @@
 {
-  "name": "project",
-  "version": "0.0.0",
+  "name": "MicroK8s-WebConsole",
+  "version": "0.0.1",
   "description": "MicroK8s web console server",
   "author": "",
   "license": "MIT",
