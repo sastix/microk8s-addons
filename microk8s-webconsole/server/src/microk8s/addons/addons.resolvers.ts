@@ -15,6 +15,9 @@ export class AddonsReslovers {
   @Mutation('setAddonStatus')
   async setAddonStatus(@Args('name') name: string, @Args('enabled') enabled: boolean): Promise<Addon>{
     await this.addonsService.setAddonStatus(name, enabled);
-    return {name: 'name', enabled: true};
+    const updated: Addon = { name: '', enabled: false};
+    updated.name = name;
+    updated.enabled = enabled;
+    return updated;
   }
 }
