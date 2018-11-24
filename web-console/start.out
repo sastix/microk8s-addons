@@ -1,0 +1,54 @@
+web-console server started on: 8082 ssl: false
+stderr: 
+stdout: microk8s is not running, try microk8s.start
+
+stderr: 
+stdout: Enabling DNS
+Applying manifest
+service/kube-dns unchanged
+serviceaccount/kube-dns unchanged
+configmap/kube-dns unchanged
+deployment.extensions/kube-dns configured
+Restarting kubelet
+DNS is enabled
+
+stderr: 
+stdout: Disabling DNS
+Reconfiguring kubelet
+Removing DNS manifest
+service "kube-dns" deleted
+serviceaccount "kube-dns" deleted
+configmap "kube-dns" deleted
+deployment.extensions "kube-dns" deleted
+DNS is disabled
+
+stderr: 
+stdout: Enabling DNS
+Applying manifest
+service/kube-dns created
+serviceaccount/kube-dns created
+configmap/kube-dns created
+deployment.extensions/kube-dns created
+Restarting kubelet
+DNS is enabled
+
+stderr: 
+stdout: Disabling DNS
+Reconfiguring kubelet
+Removing DNS manifest
+service "kube-dns" deleted
+serviceaccount "kube-dns" deleted
+configmap "kube-dns" deleted
+deployment.extensions "kube-dns" deleted
+DNS is disabled
+
+stderr: 
+stdout: Enabling DNS
+Applying manifest
+service/kube-dns created
+serviceaccount/kube-dns created
+configmap/kube-dns created
+deployment.extensions/kube-dns created
+Restarting kubelet
+DNS is enabled
+
