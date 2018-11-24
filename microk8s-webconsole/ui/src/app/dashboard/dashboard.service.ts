@@ -4,8 +4,8 @@ import {Addon} from '@common/models/addon.interface';
 import {ServiceInfo} from '@common/models/service-info.interface.';
 import {Apollo} from 'apollo-angular';
 import {IQuery} from '@common/graphql.schema';
-import gql from 'graphql-tag';
 import {map} from 'rxjs/operators';
+import {GetAddOns, GetServiceInfo, SetAddonStatus} from './dashboard.gql';
 
 @Injectable()
 export class DashboardService {
@@ -16,32 +16,27 @@ export class DashboardService {
   getAddons(): Observable<() => Addon[] | Promise<Addon[]>> {
     return this.apollo.watchQuery<IQuery>(
       {
-        query: gql`
-          query {
-            getAddons {
-              name
-              enabled
-            }
-          }
-        `
+        query: GetAddOns
       }
     ).valueChanges.pipe(
       map(result => result.data.getAddons)
     );
   }
 
+  setAddonStatus(name: string, enabled: boolean): Observable<() => Addon | Promise<Addon>> {
+    return this.apollo.mutate({
+      mutation: SetAddonStatus,
+      variables: {
+        name: name,
+        enabled: enabled
+      }
+    });
+  }
+
   getSnapInfo(): Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>> {
     return this.apollo.watchQuery<IQuery>(
       {
-        query: gql`
-          query {
-            getServiceInfo {
-              name
-              mode
-              status
-            }
-          }
-        `
+        query: GetServiceInfo
       }
     ).valueChanges.pipe(
       map(result => result.data.getServiceInfo)

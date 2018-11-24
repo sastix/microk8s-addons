@@ -7,7 +7,7 @@
 
     </div>
     <div fxFlex fxLayoutAlign="end">
-      <button mat-raised-button color="primary">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>
+      <button mat-raised-button color="primary" (click)="onClick(addOn)">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>
     </div>
   </div>
 </div>

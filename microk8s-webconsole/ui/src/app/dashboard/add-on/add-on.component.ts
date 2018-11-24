@@ -1,17 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Addon} from '@common/graphql.schema';
+import {DashboardService} from '../dashboard.service';
 
 @Component({
   selector: 'app-add-on',
   templateUrl: './add-on.component.html'
 })
-export class AddOnComponent implements OnInit {
+export class AddOnComponent {
 
   @Input() addOn: Addon;
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) {
+  }
 
-  ngOnInit() {
+  onClick(addOn: Addon): void {
+    this.dashboardService.setAddonStatus(addOn.name, !addOn.enabled);
   }
 
 }
