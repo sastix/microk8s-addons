@@ -31,21 +31,20 @@ export class DashboardService {
   }
 
   getSnapInfo(): Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>> {
-    // return this.apollo.watchQuery<IQuery>(
-    //   {
-    //     query: gql`
-    //       query {
-    //         getServiceInfo {
-    //           name
-    //           mode
-    //           status
-    //         }
-    //       }
-    //     `
-    //   }
-    // ).valueChanges.pipe(
-    //   map(result => result.data.temp__)
-    // );
-    return null;
+    return this.apollo.watchQuery<IQuery>(
+      {
+        query: gql`
+          query {
+            getServiceInfo {
+              name
+              mode
+              status
+            }
+          }
+        `
+      }
+    ).valueChanges.pipe(
+      map(result => result.data.getServiceInfo)
+    );
   }
 }

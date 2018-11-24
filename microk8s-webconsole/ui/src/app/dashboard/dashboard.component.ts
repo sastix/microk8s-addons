@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ServiceInfo} from '@common/models/service-info.interface.';
-import {Addon} from '@common/graphql.schema';
+import {Addon, ServiceInfo} from '@common/graphql.schema';
 import {DashboardService} from './dashboard.service';
 
 @Component({
@@ -11,12 +10,12 @@ import {DashboardService} from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
   addOns$: Observable<() => Addon[] | Promise<Addon[]>>;
-  services$: Observable<ServiceInfo[]>;
+  services$: Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>>;
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.addOns$ = this.dashboardService.getAddons();
-    // this.services$ = this.dashboardService.getSnapInfo();
+    this.services$ = this.dashboardService.getSnapInfo();
   }
 }
