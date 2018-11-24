@@ -16,7 +16,7 @@
       </div>
       <div class="container" fxFlex="50%" fxFlex.lt-lg="100%">
         <app-dashboard-card title="Services">
-          <div *ngIf="services$| async as services; else loadingServices;">
+          <div *ngIf="services$ | async as services; else loadingServices;">
             <div *ngFor="let service of services" fxLayout="column">
               <app-service-info [service]="service"></app-service-info>
             </div>
