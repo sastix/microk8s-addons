@@ -26,13 +26,13 @@ export class AddonsService {
     ).toPromise();
   }
 
-  async setAddonStatus(name: string, enabled: boolean){
+  async setAddonStatus(name: string, enabled: boolean, password?: string){
     let command;
     if (enabled){
       command = 'microk8s.enable';
     } else {
       command = 'microk8s.disable';
     }
-    await this.shellService.execCommand(command, [name]);
+    await this.shellService.execCommand(command, [name], password);
   }
 }
