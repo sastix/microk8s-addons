@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
 import { Addon } from '@common/models/addon.interface';
 import { from } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
-import {ShellService} from "../core/services/shell/shell.service";
+import { map } from 'rxjs/operators';
+import {ShellService} from '../core/services/shell/shell.service';
 
 @Injectable()
 export class AddonsService {
@@ -17,7 +17,7 @@ export class AddonsService {
         const values: Addon[] = [];
         for (const key in addons){
           if (addons.hasOwnProperty(key)){
-            values.push({name: key, enabled: addons[key]});
+            values.push({name: key, enabled: addons[key] === 'enabled'});
           }
         }
         return values;

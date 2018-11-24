@@ -1,0 +1,8 @@
+type Addon {
+    name: String!
+    enabled: Boolean!
+}
+
+type Query {
+    getAddons: [Addon]
+}
