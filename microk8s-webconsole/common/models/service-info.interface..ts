@@ -1,4 +1,4 @@
-export interface serviceInfo {
+export interface ServiceInfo {
     name: string;
     mode: string;
     status: string;

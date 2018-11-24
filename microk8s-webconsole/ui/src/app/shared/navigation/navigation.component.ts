@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class NavigationComponent {
 
-  appTitle: string = 'MikroK8s Web Console';
+  appTitle: string = 'MicroK8s Web Console';
   dashboardLink: string = 'Dashboard';
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

@@ -6,9 +6,10 @@ import {RouterModule} from "@angular/router";
 import {MaterialModule} from "./material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [NavigationComponent],
+  declarations: [NavigationComponent, LoadingComponent],
   imports: [
     CommonModule,
     LayoutModule,
@@ -24,7 +25,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MaterialModule,
     ReactiveFormsModule,
     NavigationComponent,
-    FlexLayoutModule
+    FlexLayoutModule,
+    LoadingComponent
   ]
 })
 export class SharedModule {
