@@ -2,7 +2,7 @@
 node_modules/
 
 # IDE
-/.idea
+.idea
 /.awcache
 /.vscode
 
