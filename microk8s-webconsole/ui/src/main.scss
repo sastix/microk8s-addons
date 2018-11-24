@@ -1,0 +1,9 @@
+@import "styles/theme";
+@import "styles/utils";
+@import "styles/variables";
+@import "styles/navigation";
+@import "styles/colors";
+
+
+@include angular-material-theme($microk8s-webconsole-ui-theme);
+

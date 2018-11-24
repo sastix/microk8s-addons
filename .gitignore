@@ -5,7 +5,7 @@ node_modules/
 .idea
 /.awcache
 /.vscode
-
+.idea
 # bundle
 packages/**/*.d.ts
 packages/**/*.js

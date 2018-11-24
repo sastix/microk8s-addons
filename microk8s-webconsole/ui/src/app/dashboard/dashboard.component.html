@@ -1,0 +1,31 @@
+<div>
+  <h1 class="mat-h1">Dashboard</h1>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div class="container" fxFlex="50%" fxFlex.lt-md="100%">
+        <app-dashboard-card title="Add Ons">
+          <div *ngIf="addOns$ | async as addOns; else loadingAddOns;">
+            <div *ngFor="let addOn of addOns" fxLayout="column">
+              <app-add-on [addOn]="addOn"></app-add-on>
+            </div>
+          </div>
+          <ng-template #loadingAddOns>
+            <app-loading [diameter]="100"></app-loading>
+          </ng-template>
+        </app-dashboard-card>
+      </div>
+      <div class="container" fxFlex="50%" fxFlex.lt-md="100%">
+        <app-dashboard-card title="Services">
+          <div *ngIf="services$ | async as services; else loadingServices;">
+            <div *ngFor="let service of services" fxLayout="column">
+              <app-service-info [service]="service"></app-service-info>
+            </div>
+          </div>
+          <ng-template #loadingServices>
+            <app-loading [diameter]="100"></app-loading>
+          </ng-template>
+        </app-dashboard-card>
+      </div>
+    </div>
+  </div>
+</div>
