@@ -6,3 +6,7 @@ type Addon {
 type Query {
     getAddons: [Addon]
 }
+
+type Mutation {
+    setAddonStatus(name: String!, enabled: Boolean!): Addon
+}
