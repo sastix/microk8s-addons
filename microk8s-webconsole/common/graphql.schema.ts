@@ -1,10 +1,9 @@
-export class Addon {
+export interface Addon {
     name: string;
     enabled: boolean;
 }
 
-export abstract class IQuery {
-    abstract getAddons(): Addon[] | Promise<Addon[]>;
-
-    abstract temp__(): boolean | Promise<boolean>;
+export interface IQuery {
+    getAddons(): Addon[] | Promise<Addon[]>;
+    temp__(): boolean | Promise<boolean>;
 }

@@ -16,7 +16,7 @@ import { SnapModule } from './snap/snap.module';
       typePaths: ['./**/*.graphql', '../common/types/**/*.graphql'],
       definitions: {
         path: join(process.cwd(), '../common/graphql.schema.ts'),
-        outputAs: 'class',
+        outputAs: 'interface',
       },
     }),
   ],
