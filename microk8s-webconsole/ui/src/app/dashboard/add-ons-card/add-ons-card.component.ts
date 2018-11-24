@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Addon} from "@common/models/addon.interface";
+import {Observable} from "rxjs";
+import {AddOnsService} from "./add-ons.service";
 
 @Component({
   selector: 'app-add-ons-card',
@@ -9,18 +11,12 @@ export class AddOnsCardComponent implements OnInit {
 
   title: string = 'Add-ons';
 
-  addOns: Addon[] = [];
+  addOns: Observable<Addon[]>;
 
-  constructor() { }
+  constructor(private addOnService: AddOnsService) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < 6; i++) {
-      const addOn = {
-        name: `Add-On ${i}`,
-        enabled: (i % 2 === 0)
-      };
-      this.addOns.push(addOn);
-    }
+    this.addOns = this.addOnService.getAddons();
   }
 
 }

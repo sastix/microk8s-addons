@@ -7,7 +7,7 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div *ngFor="let addOn of addOns" fxLayout="column">
+    <div *ngFor="let addOn of addOns | async" fxLayout="column">
       <app-add-on [addOn]="addOn"></app-add-on>
     </div>
   </mat-card-content>
