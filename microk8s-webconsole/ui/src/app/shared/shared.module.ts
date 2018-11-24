@@ -5,12 +5,14 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {RouterModule} from "@angular/router";
 import {MaterialModule} from "./material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [NavigationComponent],
   imports: [
     CommonModule,
     LayoutModule,
+    FlexLayoutModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule
@@ -21,7 +23,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     LayoutModule,
     MaterialModule,
     ReactiveFormsModule,
-    NavigationComponent
+    NavigationComponent,
+    FlexLayoutModule
   ]
 })
 export class SharedModule {

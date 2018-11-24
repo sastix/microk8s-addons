@@ -1,9 +1,11 @@
+@import "variables";
+
 .sidenav-container {
-  height: 100%;
+  height: $sidenav-height;
 }
 
 .sidenav {
-  width: 200px;
+  width: $sidenav-width;
 }
 
 .sidenav .mat-toolbar {

@@ -9,11 +9,13 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $microk8s-webconsole-ui-primary: mat-palette($mat-indigo);
-$microk8s-webconsole-ui-accent: mat-palette($mat-pink, A200, A100, A400);
+$microk8s-webconsole-ui-accent: mat-palette($mat-green, 500);
+$microk8s-webconsole-ui-success: mat-palette($mat-green, 500);
 
 // The warn palette is optional (defaults to red).
 $microk8s-webconsole-ui-warn: mat-palette($mat-red);

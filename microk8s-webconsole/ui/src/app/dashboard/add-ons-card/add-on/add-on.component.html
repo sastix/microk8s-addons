@@ -1,0 +1,11 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxFlex="50%">
+      {{addOn.name}}
+    </div>
+    <div fxFlex fxLayoutAlign="end">
+      <button mat-raised-button
+              [ngClass]="{'success-btn': addOn.enabled, 'warn-btn': !addOn.enabled}">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>
+    </div>
+  </div>
+</div>

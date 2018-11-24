@@ -1,0 +1,13 @@
+@import "theme";
+
+$color-success: mat-palette($mat-green, 500);
+
+.success-btn {
+  background-color: mat-color($color-success) !important;
+  color: #fff !important;
+}
+
+.warn-btn {
+  background-color: mat-color($microk8s-webconsole-ui-warn) !important;
+  color: #fff !important;
+}
