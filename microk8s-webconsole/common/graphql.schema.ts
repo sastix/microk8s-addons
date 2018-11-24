@@ -3,6 +3,10 @@ export interface Addon {
     enabled: boolean;
 }
 
+export interface IMutation {
+    setAddonStatus(name: string, enabled: boolean): Addon | Promise<Addon>;
+}
+
 export interface IQuery {
     getAddons(): Addon[] | Promise<Addon[]>;
     getServiceInfo(): ServiceInfo[] | Promise<ServiceInfo[]>;
