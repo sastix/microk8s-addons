@@ -1,0 +1,9 @@
+type ServiceInfo {
+    name: String!
+    mode: String!
+    status: String!
+}
+
+type Query {
+    getServiceInfo: [ServiceInfo]
+}
