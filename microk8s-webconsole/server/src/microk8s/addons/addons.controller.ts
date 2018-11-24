@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { Addon } from '../../../common/models/addon.interface';
+import { Addon } from '../../../../common/models/addon.interface';
 import { AddonsService } from './addons.service';
 
 @Controller('addons')

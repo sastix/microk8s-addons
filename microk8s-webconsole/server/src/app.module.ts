@@ -2,26 +2,25 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AddonsModule } from './addons/addons.module';
-import { SnapController } from './snap/snap.controller';
-import { SnapService } from './snap/snap.service';
-import { ShellService } from './core/services/shell/shell.service';
 import { join } from 'path';
 import { CoreModule } from './core/core.module';
+import { Microk8sModule } from './microk8s/microk8s.module';
+import { SnapModule } from './snap/snap.module';
 
 @Module({
   imports: [
-    AddonsModule,
+    Microk8sModule,
     CoreModule,
+    SnapModule,
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql', '../common/types/**/*.graphql'],
       definitions: {
         path: join(process.cwd(), '../common/graphql.schema.ts'),
-        outputAs: 'class',
+        outputAs: 'interface',
       },
     }),
   ],
-  controllers: [AppController, SnapController],
-  providers: [AppService, SnapService, ShellService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
