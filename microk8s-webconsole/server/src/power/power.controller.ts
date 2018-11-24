@@ -2,7 +2,6 @@ import { Controller, Get, Post, Res, Body } from '@nestjs/common';
 import { Power } from '../../../common/models/power.interface';
 import { PowerService } from './power.service';
 
-
 @Controller('power')
 export class PowerController {
   constructor(private readonly powerService: PowerService) {}
