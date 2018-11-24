@@ -7,3 +7,7 @@ type ServiceInfo {
 type Query {
     getServiceInfo: [ServiceInfo]
 }
+
+type Mutation {
+    setServiceStatus(name: String!, enabled: Boolean!): [ServiceInfo]
+}
