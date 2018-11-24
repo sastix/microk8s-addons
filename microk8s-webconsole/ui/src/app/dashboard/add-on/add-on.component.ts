@@ -14,7 +14,8 @@ export class AddOnComponent {
   }
 
   onClick(addOn: Addon): void {
-    this.dashboardService.setAddonStatus(addOn.name, !addOn.enabled);
+    this.dashboardService.setAddonStatus(addOn.name, !addOn.enabled)
+      .subscribe(value => this.addOn = value);
   }
 
 }

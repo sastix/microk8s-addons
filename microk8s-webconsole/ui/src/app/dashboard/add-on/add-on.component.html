@@ -1,10 +1,12 @@
 <div class="container">
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%">
+    <div fxLayoutAlign="center center">
+      <span class="status" [ngClass]="{'enabled': addOn.enabled, 'disabled': !addOn.enabled}"></span>
+    </div>
     <div fxFlex="50%">
       {{addOn.name}}
     </div>
     <div>
-
     </div>
     <div fxFlex fxLayoutAlign="end">
       <button mat-raised-button color="primary" (click)="onClick(addOn)">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>

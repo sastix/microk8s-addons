@@ -1,0 +1,21 @@
+@import "colors";
+
+.status {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.enabled {
+  background-color: mat-color(mat-palette($mat-green, 500));
+}
+
+.disabled {
+  background-color: mat-color(mat-palette($mat-red, 500));
+}
+
+
+
+
