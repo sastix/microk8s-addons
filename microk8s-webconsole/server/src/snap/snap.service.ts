@@ -1,17 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { promisify } from "util";
 import { safeLoad } from 'js-yaml';
-import {execFile} from "child_process";
 import { serviceInfo } from "@common/models/service-info.interface.";
-
-const exec_promise = promisify(execFile);
+import {ShellService} from "../core/services/shell/shell.service";
 
 @Injectable()
 export class SnapService {
 
+    constructor(private shellService: ShellService) { }
+
     async getServices(): Promise<serviceInfo[]> {
-        const { stdout, stderr } = await exec_promise('snap',  ['info', 'microk8s']);
-        const parsedOutput = safeLoad(stdout);
+        const parsedOutput = safeLoad(await this.shellService.execCommand('snap', ['info', 'microk8s']));
+
         const serviceInfoList = [];
 
         for(const element in parsedOutput.services) {

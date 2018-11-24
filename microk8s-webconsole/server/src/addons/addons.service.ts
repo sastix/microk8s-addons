@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { execFile } from 'child_process';
-import { promisify } from 'util';
 import { safeLoad } from 'js-yaml';
 import { Addon } from '@common/models/addon.interface';
-import { from, observable } from 'rxjs';
+import { from } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
-
-const exec_promise = promisify(execFile);
+import {ShellService} from "../core/services/shell/shell.service";
 
 @Injectable()
 export class AddonsService {
+
+  constructor(private shellService: ShellService) { }
+
   async getAll(): Promise<Addon[]> {
-    return await from(exec_promise('microk8s.status',  ['--yaml'])).pipe(
-      map(r => safeLoad(r.stdout).addons),
+    return await from(this.shellService.execCommand('microk8s.status', ['--yaml'])).pipe(
+      map(r => safeLoad(r).addons),
       map(addons => {
         const values: Addon[] = [];
         for (const key in addons){
