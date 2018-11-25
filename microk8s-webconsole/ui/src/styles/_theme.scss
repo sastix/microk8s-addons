@@ -26,12 +26,21 @@ $microk8s-webconsole-ui-success: mat-palette($mat-green, 500);
 $microk8s-webconsole-ui-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$microk8s-webconsole-ui-theme: mat-dark-theme($microk8s-webconsole-ui-primary, $microk8s-webconsole-ui-accent, $microk8s-webconsole-ui-warn);
+$microk8s-webconsole-ui-theme: mat-light-theme($microk8s-webconsole-ui-primary, $microk8s-webconsole-ui-accent, $microk8s-webconsole-ui-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($microk8s-webconsole-ui-theme);
+
+.dark-theme {
+  // Dark theme
+  $app-dark-primary: mat-palette($mat-deep-orange);
+  $app-dark-accent: mat-palette($mat-green,700);
+  $app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent);
+
+  @include angular-material-theme($app-dark-theme);
+}
 
 
 /* You can add global styles to this file, and also import other style files */

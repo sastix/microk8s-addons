@@ -20,6 +20,16 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ appTitle }}</span>
+      <div fxFlex></div>
+      <div fxLayout="end center">
+        <mat-slide-toggle color="accent" [checked]="isDarkTheme" (toggleChange)="onThemeToggle()">
+          <mat-icon *ngIf="isDarkTheme; else lightTheme" class="theme-slider-icon">brightness_7</mat-icon>
+        </mat-slide-toggle>
+        <ng-template #lightTheme>
+          <mat-icon class="theme-slider-icon">brightness_2</mat-icon>
+        </ng-template>
+      </div>
+
     </mat-toolbar>
     <div class="container">
       <ng-content></ng-content>

@@ -5,7 +5,7 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule, MatProgressSpinnerModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from "@angular/material";
 
@@ -20,7 +20,8 @@ import {
     MatGridListModule,
     MatMenuModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSlideToggleModule
   ]
 })
 export class MaterialModule {
