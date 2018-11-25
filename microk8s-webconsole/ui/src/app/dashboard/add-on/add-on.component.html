@@ -3,13 +3,12 @@
     <div fxLayoutAlign="center center">
       <span class="status" [ngClass]="{'enabled': addOn.enabled, 'disabled': !addOn.enabled}"></span>
     </div>
-    <div fxFlex="50%">
+    <div fxFlex>
       {{addOn.name}}
     </div>
-    <div>
-    </div>
+    <div></div>
     <div fxFlex fxLayoutAlign="end">
-      <button mat-raised-button color="primary" (click)="onClick(addOn)">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>
+      <mat-slide-toggle color="accent" [checked]="addOn.enabled" (change)="onToggleChange($event, addOn)"></mat-slide-toggle>
     </div>
   </div>
 </div>

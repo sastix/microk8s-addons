@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Addon} from '@common/graphql.schema';
 import {DashboardService} from '../dashboard.service';
+import {MatSlideToggleChange} from '@angular/material';
 
 @Component({
   selector: 'app-add-on',
@@ -13,9 +14,14 @@ export class AddOnComponent {
   constructor(private dashboardService: DashboardService) {
   }
 
-  onClick(addOn: Addon): void {
-    this.dashboardService.setAddonStatus(addOn.name, !addOn.enabled)
-      .subscribe(value => this.addOn = value);
+  onToggleChange(event: MatSlideToggleChange, addOn: Addon): void {
+    if (event.checked) {
+      this.dashboardService.setAddonStatus(addOn.name, true)
+        .subscribe(value => this.addOn = value);
+    } else if (!event.checked) {
+      this.dashboardService.setAddonStatus(addOn.name, false)
+        .subscribe(value => this.addOn = value);
+    }
   }
 
 }
