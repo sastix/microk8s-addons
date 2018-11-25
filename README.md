@@ -40,11 +40,8 @@ sudo kill <microk8s-webconsole/server>
 ```
 
 
-
-
-
 # Links
-[Kubernetes](https://kubernetes.io/)
-[MicroK8s project on github](https://github.com/ubuntu/microk8s)
-[MicroK8s project](https://microk8s.io)
+ - [Kubernetes](https://kubernetes.io/)
+ - [MicroK8s project on github](https://github.com/ubuntu/microk8s)
+ - [MicroK8s project](https://microk8s.io)
 
