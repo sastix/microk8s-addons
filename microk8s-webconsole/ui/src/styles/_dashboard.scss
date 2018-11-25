@@ -13,11 +13,11 @@
 }
 
 .enabled {
-  background-color: mat-color(mat-palette($mat-green, 500));
+  background-color: mat-color(mat-palette($mat-green, A400));
 }
 
 .disabled {
-  background-color: mat-color(mat-palette($mat-red, 500));
+  background-color: mat-color(mat-palette($mat-red, A700));
 }
 
 
