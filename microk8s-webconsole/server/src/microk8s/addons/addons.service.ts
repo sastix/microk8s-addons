@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
-import { Addon } from '../../../../common/models/addon.interface';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {ShellService} from '../../core/services/shell/shell.service';
+import { Addon } from '@common/graphql.schema';
 
 @Injectable()
 export class AddonsService {

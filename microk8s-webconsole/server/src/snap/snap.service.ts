@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
-import { ServiceInfo } from '@common/models/service-info.interface.';
 import { ShellService } from '../core/services/shell/shell.service';
+import { ServiceInfo } from '@common/graphql.schema';
 
 @Injectable()
 export class SnapService {
