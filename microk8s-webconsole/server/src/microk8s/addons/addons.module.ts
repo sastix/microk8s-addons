@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AddonsService } from './addons.service';
-import { AddonsReslovers } from './addons.resolvers';
+import { AddonsResolvers } from './addons.resolvers';
 
 @Module({
-  providers: [AddonsService, AddonsReslovers],
+  providers: [AddonsService, AddonsResolvers],
   controllers: [],
 })
 export class AddonsModule {}
