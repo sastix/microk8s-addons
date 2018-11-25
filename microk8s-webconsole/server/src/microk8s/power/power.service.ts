@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
-import { Power } from '../../../../common/models/power.interface';
 import { ShellService } from '../../core/services/shell/shell.service';
+import { Power } from '@common/graphql.schema';
 
 @Injectable()
 export class PowerService {

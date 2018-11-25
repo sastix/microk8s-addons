@@ -8,6 +8,10 @@ export interface IMutation {
     setServiceStatus(name: string, enabled: boolean): ServiceInfo[] | Promise<ServiceInfo[]>;
 }
 
+export interface Power {
+    running: boolean;
+}
+
 export interface IQuery {
     getAddons(): Addon[] | Promise<Addon[]>;
     getServiceInfo(): ServiceInfo[] | Promise<ServiceInfo[]>;
