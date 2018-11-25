@@ -1,6 +1,6 @@
 # MicroK8s Web Console
 
-[MicroK8s][MicroK8s project] provides a local [Kubernetes][Kubernetes] that you can manage through the CLI. This project provides a web console over the most common operations a developer will need when interactig with MicroK8s.
+![MicroK8s](https://kubernetes.io/) provides a local ![Kubernetes](https://kubernetes.io/) that you can manage through the CLI. This project provides a web console over the most common operations a developer will need when interactig with MicroK8s.
 
 ![Screenshot](images/screenshot.png)
 
