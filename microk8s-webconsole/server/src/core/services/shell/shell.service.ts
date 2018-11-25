@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { promisify } from 'util';
 import { execFile, exec } from 'child_process';
-import sudo = require('sudo-js');
 
 const exec_promise = promisify(execFile);
 const exec_sudo_promise = promisify(exec);
