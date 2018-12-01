@@ -6,7 +6,9 @@ export interface Addon {
 export interface IMutation {
     setAddonStatus(name: string, enabled: boolean, password?: string): Addon | Promise<Addon>;
     setPower(enabled: boolean): Power | Promise<Power>;
-    setServiceStatus(name: string, enabled: boolean): ServiceInfo[] | Promise<ServiceInfo[]>;
+    setServiceStatus(name: string, enabled: boolean): ServiceInfo | Promise<ServiceInfo>;
+    setServiceMode(name: string, enabled: boolean): ServiceInfo | Promise<ServiceInfo>;
+    restartService(name: string): ServiceInfo | Promise<ServiceInfo>;
 }
 
 export interface Power {
