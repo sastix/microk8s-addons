@@ -3,7 +3,7 @@ import { AddonsService } from './addons.service';
 import { Addon } from '@common/graphql.schema';
 
 @Resolver('Addons')
-export class AddonsReslovers {
+export class AddonsResolvers {
 
   constructor(private readonly addonsService: AddonsService) {}
 

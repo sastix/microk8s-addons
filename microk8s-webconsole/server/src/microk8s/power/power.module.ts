@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { PowerService } from './power.service';
-import {ShellService} from '../../core/services/shell/shell.service';
+import { PowerResolvers } from './power.resolvers';
 
 @Module({
-  providers: [PowerService, ShellService],
+  providers: [PowerService, PowerResolvers],
   controllers: [],
 })
 export class PowerModule {}

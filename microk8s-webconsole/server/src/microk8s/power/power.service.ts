@@ -23,16 +23,12 @@ export class PowerService {
 
   async on(): Promise<Power> {
     await this.shellService.execCommand('microk8s.start', []);
-    const power: Power = { running: true};
-    power.running = true;
-    return power;
+    return { running: true};
   }
 
   async off(): Promise<Power> {
     await this.shellService.execCommand('microk8s.stop', []);
-    const power: Power = { running: true};
-    power.running = false;
-    return power;
+    return { running: false };
   }
 
 }
