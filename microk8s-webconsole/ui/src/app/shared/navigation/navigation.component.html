@@ -3,11 +3,22 @@
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>
+      <span>Menu</span>
+      <div fxFlex></div>
+      <div fxLayout="row">
+        <mat-icon class="theme-slider-icon white-theme-icon">brightness_7</mat-icon>
+        <mat-slide-toggle color="accent" [checked]="isDarkTheme" (toggleChange)="onThemeToggle()">
+          <mat-icon class="theme-slider-icon">brightness_2</mat-icon>
+        </mat-slide-toggle>
+      </div>
+    </mat-toolbar>
     <mat-nav-list>
+     
       <a mat-list-item [routerLink]="['dashboard']">{{dashboardLink}}</a>
       <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,12 +33,7 @@
       <span>{{ appTitle }}</span>
       <div fxFlex></div>
       <div fxLayout="end center">
-        <mat-slide-toggle color="accent" [checked]="isDarkTheme" (toggleChange)="onThemeToggle()">
-          <mat-icon *ngIf="isDarkTheme; else lightTheme" class="theme-slider-icon">brightness_7</mat-icon>
-        </mat-slide-toggle>
-        <ng-template #lightTheme>
-          <mat-icon class="theme-slider-icon">brightness_2</mat-icon>
-        </ng-template>
+
       </div>
 
     </mat-toolbar>

@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Addon} from '@common/models/addon.interface';
-import {ServiceInfo} from '@common/models/service-info.interface.';
 import {Apollo} from 'apollo-angular';
-import {IMutation, IQuery} from '@common/graphql.schema';
+import {Addon, IMutation, IQuery, ServiceInfo} from '@common/graphql.schema';
 import {map} from 'rxjs/operators';
 import {GetAddOns, GetServiceInfo, SetAddonStatus} from './dashboard.gql';
 

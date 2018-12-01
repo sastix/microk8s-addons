@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ServiceInfo} from '@common/models/service-info.interface.';
+import {ServiceInfo} from '@common/graphql.schema';
 
 @Component({
   selector: 'app-service-info',

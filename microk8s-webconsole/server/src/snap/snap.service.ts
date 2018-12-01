@@ -13,7 +13,7 @@ export class SnapService {
 
         const serviceInfoList = [];
 
-        for(const element in parsedOutput.services) {
+        for (const element in parsedOutput.services) {
             const opts: string = parsedOutput.services[element];
             const el = opts.split(', ');
             serviceInfoList.push({name: element, mode: el[1].replace(' ', ''), status: el[2].replace(' ', '')});
@@ -22,11 +22,9 @@ export class SnapService {
         return serviceInfoList;
     }
 
-    async setServiceStatus(serviceName: string, enabled: boolean): Promise<ServiceInfo[]> {
-        await this.shellService.execCommand('sudo',  ['systemctl', enabled ? 'start' : 'stop', 'snap.' + serviceName + '.service']);
+    async setServiceStatus(serviceName: string, active: boolean): Promise<ServiceInfo[]> {
+        await this.shellService.execCommand('sudo',  ['systemctl', active ? 'start' : 'stop', 'snap.' + serviceName + '.service']);
 
         return this.getServices();
     }
-
-
 }
