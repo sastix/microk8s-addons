@@ -3,6 +3,19 @@ export interface Addon {
     enabled: boolean;
 }
 
+export interface JournalCtlLog {
+    MESSAGE?: string;
+    SYSLOG_IDENTIFIER?: string;
+    _HOSTNAME?: string;
+    _PID?: string;
+    _UID?: string;
+    _BOOT_ID?: string;
+    PRIORITY?: string;
+    _MACHINE_ID?: string;
+    _EXE?: string;
+    _COMM?: string;
+}
+
 export interface IMutation {
     setAddonStatus(name: string, enabled: boolean, password?: string): Addon | Promise<Addon>;
     setPower(enabled: boolean): Power | Promise<Power>;
@@ -31,5 +44,5 @@ export interface ServiceInfo {
 
 export interface ServiceLogs {
     name: string;
-    logs?: string[];
+    logs?: JournalCtlLog[];
 }

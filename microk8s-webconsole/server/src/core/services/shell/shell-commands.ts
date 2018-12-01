@@ -13,7 +13,7 @@ export class ShellCommands {
     }
 
     serviceLogs(serviceName: string, size: string) {
-        return `sudo journalctl -n ${size} --unit=snap.${serviceName}.service --no-pager`;
+        return `sudo journalctl --lines=${size} --unit=snap.${serviceName}.service --no-pager --output=json-pretty`;
     }
 
     snapInfo(snapName: string) {

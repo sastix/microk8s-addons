@@ -6,7 +6,20 @@ type ServiceInfo {
 
 type ServiceLogs {
     name: String!
-    logs: [String]!
+    logs: [JournalCtlLog]!
+}
+
+type JournalCtlLog {
+    MESSAGE: String
+    SYSLOG_IDENTIFIER: String
+    _HOSTNAME: String
+    _PID: String
+    _UID: String
+    _BOOT_ID: String
+    PRIORITY: String
+    _MACHINE_ID: String
+    _EXE: String
+    _COMM: String
 }
 
 type Query {
