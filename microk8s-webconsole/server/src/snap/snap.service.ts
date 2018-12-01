@@ -2,14 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
 import { ShellService } from '../core/services/shell/shell.service';
 import { ServiceInfo } from '@common/graphql.schema';
+import { ShellCommands } from '../core/services/shell/shell-commands';
 
 @Injectable()
 export class SnapService {
 
-    constructor(private shellService: ShellService) { }
+    constructor(private shellService: ShellService, private shellCommands: ShellCommands) { }
 
     async getServices(): Promise<ServiceInfo[]> {
-        const parsedOutput = safeLoad(await this.shellService.execCommand('snap', ['info', 'microk8s']));
+        const parsedOutput = safeLoad(await this.shellService.execCommandOneLine(this.shellCommands.snapInfo('microk8s')));
 
         const serviceInfoList = [];
 
@@ -23,7 +24,7 @@ export class SnapService {
     }
 
     async getService(name: string): Promise<ServiceInfo> {
-        const parsedOutput = safeLoad(await this.shellService.execCommand('snap', ['info', 'microk8s']));
+        const parsedOutput = safeLoad(await this.shellService.execCommandOneLine(this.shellCommands.snapInfo('microk8s')));
 
         for (const element in parsedOutput.services) {
             const opts: string = parsedOutput.services[element];
@@ -35,19 +36,19 @@ export class SnapService {
     }
 
     async setServiceStatus(serviceName: string, active: boolean): Promise<ServiceInfo> {
-        await this.shellService.execCommand('sudo',  ['systemctl', active ? 'start' : 'stop', 'snap.' + serviceName + '.service']);
+        await this.shellService.execCommandOneLine(this.shellCommands.serviceStart(serviceName, active));
 
         return this.getService(serviceName);
     }
 
     async setServiceMode(serviceName: string, enabled: boolean): Promise<ServiceInfo> {
-        await this.shellService.execCommand('sudo',  ['systemctl', enabled ? 'enable' : 'disable', 'snap.' + serviceName + '.service']);
+        await this.shellService.execCommandOneLine(this.shellCommands.serviceEnable(serviceName, enabled));
 
         return this.getService(serviceName);
     }
 
     async restartService(serviceName: string): Promise<ServiceInfo> {
-        await this.shellService.execCommand('sudo',  ['systemctl', 'restart', 'snap.' + serviceName + '.service']);
+        await this.shellService.execCommandOneLine(this.shellCommands.serviceRestart(serviceName));
 
         return this.getService(serviceName);
     }
