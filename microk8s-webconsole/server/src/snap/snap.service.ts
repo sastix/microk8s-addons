@@ -22,9 +22,34 @@ export class SnapService {
         return serviceInfoList;
     }
 
-    async setServiceStatus(serviceName: string, active: boolean): Promise<ServiceInfo[]> {
+    async getService(name: string): Promise<ServiceInfo> {
+        const parsedOutput = safeLoad(await this.shellService.execCommand('snap', ['info', 'microk8s']));
+
+        for (const element in parsedOutput.services) {
+            const opts: string = parsedOutput.services[element];
+            const el = opts.split(', ');
+            if(element === name) {
+                return {name: element, mode: el[1].replace(' ', ''), status: el[2].replace(' ', '')};
+            }
+        }
+    }
+
+    async setServiceStatus(serviceName: string, active: boolean): Promise<ServiceInfo> {
         await this.shellService.execCommand('sudo',  ['systemctl', active ? 'start' : 'stop', 'snap.' + serviceName + '.service']);
 
-        return this.getServices();
+        return this.getService(serviceName);
     }
+
+    async setServiceMode(serviceName: string, enabled: boolean): Promise<ServiceInfo> {
+        await this.shellService.execCommand('sudo',  ['systemctl', enabled ? 'enable' : 'disable', 'snap.' + serviceName + '.service']);
+
+        return this.getService(serviceName);
+    }
+
+    async restartService(serviceName: string): Promise<ServiceInfo> {
+        await this.shellService.execCommand('sudo',  ['systemctl', 'restart', 'snap.' + serviceName + '.service']);
+
+        return this.getService(serviceName);
+    }
+
 }

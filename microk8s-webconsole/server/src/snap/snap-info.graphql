@@ -9,5 +9,13 @@ type Query {
 }
 
 type Mutation {
-    setServiceStatus(name: String!, enabled: Boolean!): [ServiceInfo]
+    setServiceStatus(name: String!, enabled: Boolean!): ServiceInfo
+}
+
+type Mutation {
+    setServiceMode(name: String!, enabled: Boolean!): ServiceInfo
+}
+
+type Mutation {
+    restartService(name: String!): ServiceInfo
 }
