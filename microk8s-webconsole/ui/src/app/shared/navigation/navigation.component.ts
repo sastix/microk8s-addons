@@ -35,5 +35,4 @@ export class NavigationComponent implements OnInit {
     this.themeToggle.emit();
   }
 
-
 }
