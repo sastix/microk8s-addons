@@ -1,4 +1,4 @@
-import {InjectionToken, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NavigationComponent} from './navigation/navigation.component';
 import {LayoutModule} from '@angular/cdk/layout';

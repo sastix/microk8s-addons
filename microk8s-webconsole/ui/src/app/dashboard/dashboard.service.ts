@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Apollo} from 'apollo-angular';
-import {Addon, IMutation, IQuery, ServiceInfo} from '@common/graphql.schema';
-import {map} from 'rxjs/operators';
-import {GetAddOns, GetServiceInfo, SetAddonStatus} from './dashboard.gql';
+import {Addon, IMutation, IQuery, Power, ServiceInfo} from '@common/graphql.schema';
+import {map, share} from 'rxjs/operators';
+import {GetAddOns, GetMicroK8sPower, GetServiceInfo, SetAddonStatus, SetMicroK8sPower} from './dashboard.gql';
 
 @Injectable()
 export class DashboardService {
@@ -41,6 +41,32 @@ export class DashboardService {
     }).pipe(
       map(result => {
         return result.data.setAddonStatus;
+      })
+    );
+  }
+
+  getMicroK8sStatus(): Observable<() => Power | Promise<Power>> {
+    return this.apollo.watchQuery<IQuery>(
+      {
+        query: GetMicroK8sPower
+      }
+    ).valueChanges
+      .pipe(
+        share(),
+        map(result => result.data.getPower)
+      );
+  }
+
+  setMicroK8sStatus(enabled: boolean): Observable<() => Power | Promise<Power>> {
+    return this.apollo.mutate<IMutation>({
+      mutation: SetMicroK8sPower,
+      variables: {
+        enabled: enabled
+      }
+    }).pipe(
+      share(),
+      map(result => {
+        return result.data.setPower;
       })
     );
   }

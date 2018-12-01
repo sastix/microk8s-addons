@@ -27,3 +27,20 @@ export const SetAddonStatus = gql`
     }
   }
 `;
+
+export const GetMicroK8sPower = gql`
+  query {
+    getPower {
+      running
+    }
+  }
+`;
+
+export const SetMicroK8sPower = gql`
+  mutation setPower($enabled: Boolean!) {
+    setPower(enabled: $enabled) {
+      running
+    }
+  }
+`;
+
