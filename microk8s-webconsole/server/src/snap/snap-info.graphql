@@ -4,8 +4,17 @@ type ServiceInfo {
     status: String!
 }
 
+type ServiceLogs {
+    name: String!
+    logs: [String]!
+}
+
 type Query {
     getServiceInfo: [ServiceInfo]
+}
+
+type Query {
+    getServiceLogs(name: String!, size: String!): ServiceLogs
 }
 
 type Mutation {

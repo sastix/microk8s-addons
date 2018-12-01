@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { safeLoad } from 'js-yaml';
 import { ShellService } from '../core/services/shell/shell.service';
-import { ServiceInfo } from '@common/graphql.schema';
+import { ServiceInfo, ServiceLogs } from '@common/graphql.schema';
 import { ShellCommands } from '../core/services/shell/shell-commands';
 
 @Injectable()
@@ -51,6 +51,12 @@ export class SnapService {
         await this.shellService.execCommand(this.shellCommands.serviceRestart(serviceName));
 
         return this.getService(serviceName);
+    }
+
+    async getServiceLogs(serviceName: string, size: string): Promise<ServiceLogs> {
+        const output = await this.shellService.execCommand(this.shellCommands.serviceLogs(serviceName, size));
+
+        return {name: serviceName, logs: output.split('\n')}
     }
 
 }

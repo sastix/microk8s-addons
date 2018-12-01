@@ -12,6 +12,10 @@ export class ShellCommands {
         return `sudo systemctl ${enabled ? 'enable' : 'disable'} snap.${serviceName}.service`;
     }
 
+    serviceLogs(serviceName: string, size: string) {
+        return `sudo journalctl -n ${size} --unit=snap.${serviceName}.service --no-pager`;
+    }
+
     snapInfo(snapName: string) {
         return `snap info ${snapName}`;
     }

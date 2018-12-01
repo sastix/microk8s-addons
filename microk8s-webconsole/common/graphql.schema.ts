@@ -19,6 +19,7 @@ export interface IQuery {
     getAddons(): Addon[] | Promise<Addon[]>;
     getPower(): Power | Promise<Power>;
     getServiceInfo(): ServiceInfo[] | Promise<ServiceInfo[]>;
+    getServiceLogs(name: string, size: string): ServiceLogs | Promise<ServiceLogs>;
     temp__(): boolean | Promise<boolean>;
 }
 
@@ -26,4 +27,9 @@ export interface ServiceInfo {
     name: string;
     mode: string;
     status: string;
+}
+
+export interface ServiceLogs {
+    name: string;
+    logs?: string[];
 }
