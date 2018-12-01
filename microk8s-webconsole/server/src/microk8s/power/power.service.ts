@@ -11,7 +11,7 @@ export class PowerService {
 
   async getState(): Promise<Power> {
     try {
-      const parsed = safeLoad(await this.shellService.execCommandOneLine(this.shellCommands.mk8sStatus()));
+      const parsed = safeLoad(await this.shellService.execCommand(this.shellCommands.mk8sStatus()));
       const isRunning: boolean = parsed.microk8s.running;
       const power: Power = { running: true };
       power.running = isRunning;
@@ -23,12 +23,12 @@ export class PowerService {
   }
 
   async on(): Promise<Power> {
-    await this.shellService.execCommandOneLine(this.shellCommands.mk8sStart(true));
+    await this.shellService.execCommand(this.shellCommands.mk8sStart(true));
     return { running: true};
   }
 
   async off(): Promise<Power> {
-    await this.shellService.execCommandOneLine(this.shellCommands.mk8sStart(false));
+    await this.shellService.execCommand(this.shellCommands.mk8sStart(false));
     return { running: false };
   }
 

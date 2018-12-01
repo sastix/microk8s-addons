@@ -7,7 +7,7 @@ const exec_promise = promisify(exec);
 @Injectable()
 export class ShellService {
 
-    async execCommandOneLine(cmd: string, password?: string): Promise<string> {
+    async execCommand(cmd: string, password?: string): Promise<string> {
         if (password){
             // TODO: Possibly remove
             const command = `echo ${password} | sudo -S ${cmd}`;

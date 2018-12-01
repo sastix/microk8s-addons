@@ -10,7 +10,7 @@ export class SnapService {
     constructor(private shellService: ShellService, private shellCommands: ShellCommands) { }
 
     async getServices(): Promise<ServiceInfo[]> {
-        const parsedOutput = safeLoad(await this.shellService.execCommandOneLine(this.shellCommands.snapInfo('microk8s')));
+        const parsedOutput = safeLoad(await this.shellService.execCommand(this.shellCommands.snapInfo('microk8s')));
 
         const serviceInfoList = [];
 
@@ -24,7 +24,7 @@ export class SnapService {
     }
 
     async getService(name: string): Promise<ServiceInfo> {
-        const parsedOutput = safeLoad(await this.shellService.execCommandOneLine(this.shellCommands.snapInfo('microk8s')));
+        const parsedOutput = safeLoad(await this.shellService.execCommand(this.shellCommands.snapInfo('microk8s')));
 
         for (const element in parsedOutput.services) {
             const opts: string = parsedOutput.services[element];
@@ -36,19 +36,19 @@ export class SnapService {
     }
 
     async setServiceStatus(serviceName: string, active: boolean): Promise<ServiceInfo> {
-        await this.shellService.execCommandOneLine(this.shellCommands.serviceStart(serviceName, active));
+        await this.shellService.execCommand(this.shellCommands.serviceStart(serviceName, active));
 
         return this.getService(serviceName);
     }
 
     async setServiceMode(serviceName: string, enabled: boolean): Promise<ServiceInfo> {
-        await this.shellService.execCommandOneLine(this.shellCommands.serviceEnable(serviceName, enabled));
+        await this.shellService.execCommand(this.shellCommands.serviceEnable(serviceName, enabled));
 
         return this.getService(serviceName);
     }
 
     async restartService(serviceName: string): Promise<ServiceInfo> {
-        await this.shellService.execCommandOneLine(this.shellCommands.serviceRestart(serviceName));
+        await this.shellService.execCommand(this.shellCommands.serviceRestart(serviceName));
 
         return this.getService(serviceName);
     }

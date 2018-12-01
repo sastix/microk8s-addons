@@ -12,7 +12,7 @@ export class AddonsService {
   constructor(private shellService: ShellService, private shellCommands: ShellCommands) { }
 
   async getAll(): Promise<Addon[]> {
-    return await from(this.shellService.execCommandOneLine(this.shellCommands.mk8sStatus())).pipe(
+    return await from(this.shellService.execCommand(this.shellCommands.mk8sStatus())).pipe(
       map(r => safeLoad(r).addons),
       map(addons => {
         const values: Addon[] = [];
@@ -27,6 +27,6 @@ export class AddonsService {
   }
 
   async setAddonStatus(name: string, enabled: boolean, password?: string){
-    await this.shellService.execCommandOneLine(this.shellCommands.mk8sEnable(name, enabled), password);
+    await this.shellService.execCommand(this.shellCommands.mk8sEnable(name, enabled), password);
   }
 }
