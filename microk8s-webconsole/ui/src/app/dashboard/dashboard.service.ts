@@ -16,9 +16,10 @@ export class DashboardService {
       {
         query: GetAddOns
       }
-    ).valueChanges.pipe(
-      map(result => result.data.getAddons)
-    );
+    ).valueChanges
+      .pipe(
+        map(({data}) => data.getAddons)
+      );
   }
 
   getSnapInfo(): Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>> {
@@ -71,3 +72,5 @@ export class DashboardService {
     );
   }
 }
+
+

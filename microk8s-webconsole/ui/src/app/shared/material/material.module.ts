@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
-  MatButtonModule, MatCardModule,
+  MatButtonModule, MatCardModule, MatExpansionModule,
   MatGridListModule,
   MatIconModule,
   MatListModule,
@@ -22,7 +22,8 @@ import {
     MatCardModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule {

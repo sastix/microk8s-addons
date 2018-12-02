@@ -21,9 +21,11 @@
       <div class="card-container" fxFlex="50%" fxFlex.lt-md="100%">
         <app-dashboard-card title="Add Ons" *ngIf="(power$ | async)?.running; else microK8sNotRunning">
           <div *ngIf="addOns$ | async as addOns; else loadingAddOns;">
-            <div *ngFor="let addOn of addOns" fxLayout="column">
-              <app-add-on [addOn]="addOn"></app-add-on>
-            </div>
+            <mat-accordion multi="true">
+              <div *ngFor="let addOn of addOns" fxLayout="column">
+                <app-add-on class="mt-1" [addOn]="addOn"></app-add-on>
+              </div>
+            </mat-accordion>
           </div>
           <ng-template #loadingAddOns>
             <app-loading [diameter]="100"></app-loading>

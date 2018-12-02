@@ -1,14 +1,23 @@
-<div class="container">
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%">
-    <div fxLayoutAlign="center center">
-      <span class="status" [ngClass]="{'enabled': addOn.enabled, 'disabled': !addOn.enabled}"></span>
+<!--<div class="container">-->
+  <mat-expansion-panel >
+    <mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2%">
+      <!--<div fxLayoutAlign="center center">-->
+        <!--<span class="status" [ngClass]="{'enabled': addOn.enabled, 'disabled': !addOn.enabled}"></span>-->
+      <!--</div>-->
+      <div>
+        <mat-slide-toggle [color]="addOn.enabled ? 'accent' : 'warn'" [checked]="addOn.enabled"
+                          (change)="onToggleChange($event, addOn);" (click)="$event.stopPropagation();">
+          {{addOn.name}}
+        </mat-slide-toggle>
+      </div>
+      <div>
+      </div>
+      <div fxFlex fxLayoutAlign="end">
+
+      </div>
     </div>
-    <div fxFlex>
-      {{addOn.name}}
-    </div>
-    <div></div>
-    <div fxFlex fxLayoutAlign="end">
-      <mat-slide-toggle color="accent" [checked]="addOn.enabled" (change)="onToggleChange($event, addOn)"></mat-slide-toggle>
-    </div>
-  </div>
-</div>
+    </mat-expansion-panel-header>
+    <p [innerHtml]="addOn.info"></p>
+  </mat-expansion-panel>
+<!--</div>-->
