@@ -48,9 +48,11 @@
       <div class="card-container" fxFlex="50%" fxFlex.lt-md="100%">
         <app-dashboard-card title="Services">
           <div *ngIf="services$ | async as services; else loadingServices;">
-            <div *ngFor="let service of services" fxLayout="column">
-              <app-service-info [service]="service"></app-service-info>
-            </div>
+            <mat-accordion multi="true">
+              <div *ngFor="let service of services" fxLayout="column">
+                <app-service-info class="mt-1" [service]="service"></app-service-info>
+              </div>
+            </mat-accordion>
           </div>
           <ng-template #loadingServices>
             <app-loading [diameter]="100"></app-loading>

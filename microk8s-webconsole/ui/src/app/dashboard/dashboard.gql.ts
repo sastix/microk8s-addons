@@ -44,3 +44,33 @@ export const SetMicroK8sPower = gql`
   }
 `;
 
+export const RestartService = gql`
+  mutation restartService($name: String!) {
+    restartService(name: $name) {
+      name
+      mode
+      status
+    }
+  }
+`;
+
+export const SetServiceMode = gql`
+  mutation setServiceMode($name: String!, $enabled: Boolean!) {
+    setServiceMode(name: $name, enabled: $enabled) {
+      name
+      mode
+      status
+    }
+  }
+`;
+
+export const SetServiceStatus = gql`
+  mutation setServiceStatus($name: String!, $enabled: Boolean!) {
+    setServiceStatus(name: $name, enabled: $enabled) {
+      name
+      mode
+      status
+    }
+  }
+`;
+

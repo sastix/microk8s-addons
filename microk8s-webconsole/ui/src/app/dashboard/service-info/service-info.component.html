@@ -1,12 +1,33 @@
-<div class="container">
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <div fxFlex="50%">
-      {{service.name}}
+<mat-expansion-panel>
+  <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+    <div fxLayout="row" fxFill fxLayoutAlign="start center">
+      <div fxFlex>
+        <mat-slide-toggle matTooltipPosition="after"
+        [matTooltip]="service.status === 'active' ? 'Disable' : 'Enable'"
+        [color]="service.status === 'active' ? 'accent' : 'warn'" [checked]="service.status === 'active'"
+        (change)="onToggleChange(service, $event);" (click)="$event.stopPropagation();">
+          {{service.name}}
+        </mat-slide-toggle>
+      </div>
+      <div class="mr-1" fxLayout="row" fxLayoutAlign="end">
+        <button mat-icon-button
+                color="primary"
+                matTooltipPosition="left"
+                [matTooltip]="'Restart service'"
+                (click)="onRestartClick(service, $event);">
+          <mat-icon aria-label="Restart service">refresh</mat-icon>
+        </button>
+        <button mat-icon-button
+                matTooltipPosition="right"
+                [matTooltip]="'Enable service'"
+                [color]="service.mode == 'enabled' ? 'accent' : 'warn'"
+                (click)="onPowerClick(service, $event)">
+          <mat-icon aria-label="Enable/Disable service">power_settings_new</mat-icon>
+        </button>
+      </div>
     </div>
-    <div fxFlex fxLayoutAlign="end">
-      {{service.mode}}, {{service.status}}
-      <!--<button mat-raised-button-->
-              <!--[ngClass]="{'success-btn': addOn.enabled, 'warn-btn': !addOn.enabled}">{{ addOn.enabled ? 'Disable' : 'Enable' }}</button>-->
-    </div>
-  </div>
-</div>
+  </mat-expansion-panel-header>
+  <p>
+    logs will go here!
+  </p>
+</mat-expansion-panel>

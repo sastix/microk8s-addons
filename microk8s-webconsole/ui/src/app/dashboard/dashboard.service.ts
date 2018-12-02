@@ -3,7 +3,14 @@ import {Observable} from 'rxjs';
 import {Apollo} from 'apollo-angular';
 import {Addon, IMutation, IQuery, Power, ServiceInfo} from '@common/graphql.schema';
 import {map, share} from 'rxjs/operators';
-import {GetAddOns, GetMicroK8sPower, GetServiceInfo, SetAddonStatus, SetMicroK8sPower} from './dashboard.gql';
+import {
+  GetAddOns,
+  GetMicroK8sPower,
+  GetServiceInfo,
+  RestartService,
+  SetAddonStatus,
+  SetMicroK8sPower, SetServiceMode, SetServiceStatus
+} from './dashboard.gql';
 
 @Injectable()
 export class DashboardService {
@@ -66,9 +73,48 @@ export class DashboardService {
       }
     }).pipe(
       share(),
-      map(result => {
-        return result.data.setPower;
-      })
+      map(result => result.data.setPower)
+    );
+  }
+
+  restartService(serviceName: string): Observable<ServiceInfo> {
+    return this.apollo.mutate<IMutation>(
+      {
+        mutation: RestartService,
+        variables: {
+          name: serviceName
+        }
+      }
+    ).pipe(
+      map(result => result.data.restartService)
+    );
+  }
+
+  setServiceMode(serviceName: string, enabled: boolean): Observable<ServiceInfo> {
+    return this.apollo.mutate<IMutation>(
+      {
+        mutation: SetServiceMode,
+        variables: {
+          name: serviceName,
+          enabled: enabled
+        }
+      }
+    ).pipe(
+      map(result => result.data.setServiceMode)
+    );
+  }
+
+  setServiceStatus(serviceName: string, enabled: boolean): Observable<ServiceInfo> {
+    return this.apollo.mutate<IMutation>(
+      {
+        mutation: SetServiceStatus,
+        variables: {
+          name: serviceName,
+          enabled: enabled
+        }
+      }
+    ).pipe(
+      map(result => result.data.setServiceStatus)
     );
   }
 }
