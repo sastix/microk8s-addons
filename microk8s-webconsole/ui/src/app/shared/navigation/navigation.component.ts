@@ -12,6 +12,9 @@ export class NavigationComponent implements OnInit {
 
   appTitle = 'MicroK8s Web Console';
   dashboardLink = 'Dashboard';
+  overviewLinkTitle = 'Overview';
+  myServicesLinkTitle = 'My Services';
+  aboutLinkTitle = 'About';
 
   @Output() themeToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   isDarkTheme: boolean;

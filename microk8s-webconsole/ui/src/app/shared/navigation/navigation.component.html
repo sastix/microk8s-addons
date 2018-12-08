@@ -21,8 +21,28 @@
           <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{dashboardLink}}</div>
         </a>
       </div>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['overview']">
+          <mat-icon>developer_board</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{overviewLinkTitle}}</div>
+        </a>
+      </div>
+
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['myservices']">
+          <mat-icon>computer</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{myServicesLinkTitle}}</div>
+        </a>
+      </div>
+
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['about']">
+          <mat-icon>info</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{aboutLinkTitle}}</div>
+        </a>
+      </div>
+
+
 
     </mat-nav-list>
   </mat-sidenav>
