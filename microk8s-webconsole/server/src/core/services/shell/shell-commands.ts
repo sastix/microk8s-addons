@@ -24,6 +24,10 @@ export class ShellCommands {
         return `microk8s.status --yaml`;
     }
 
+    mk8sOverview() {
+        return `microk8s.kubectl get all --all-namespaces`;
+    }
+
     mk8sEnable(addOnName: string, enable: boolean) {
         return `microk8s.${enable ? 'enable' : 'disable'} ${addOnName}`;
     }
