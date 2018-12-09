@@ -19,6 +19,15 @@ export const GetServiceInfo = gql`
   }
 `;
 
+export const GetMicroK8sOverview = gql`
+  query {
+    getMicroK8sOverview {
+      timestamp
+      output
+    }
+  }
+`;
+
 export const SetAddonStatus = gql`
   mutation setAddonStatus($name: String!, $enabled: Boolean!) {
     setAddonStatus(name: $name, enabled: $enabled) {

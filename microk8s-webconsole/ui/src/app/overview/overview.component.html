@@ -2,5 +2,12 @@
   <div fxLayout="row">
     <h1 class="mat-h1">{{overviewTitle}}</h1>
     <div fxFlex></div>
+
+  </div>
+  <div *ngIf="microK8sOverview$ | async as microK8sOverview; else loadingMicroK8sOverview">
+    <h3>{{microK8sOverview.timestamp}}</h3>
+    <pre>
+      {{microK8sOverview.output}}
+    </pre>
   </div>
 </div>

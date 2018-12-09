@@ -24,7 +24,7 @@
       <div mat-list-item>
         <a mat-list-item [routerLink]="['overview']">
           <mat-icon>developer_board</mat-icon>
-          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{overviewLinkTitle}}</div>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span" (click)="onOverviewClick()">{{overviewLinkTitle}}</div>
         </a>
       </div>
 

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Apollo} from 'apollo-angular';
-import {Addon, IMutation, IQuery, Power, ServiceInfo} from '@common/graphql.schema';
+import {Addon, IMutation, IQuery, MicroK8sOverview, Power, ServiceInfo} from '@common/graphql.schema';
 import {map, share} from 'rxjs/operators';
 import {
-  GetAddOns,
+  GetAddOns, GetMicroK8sOverview,
   GetMicroK8sPower,
   GetServiceInfo,
   RestartService,
@@ -36,6 +36,16 @@ export class DashboardService {
       }
     ).valueChanges.pipe(
       map(result => result.data.getServiceInfo)
+    );
+  }
+
+  getMicroK8sOverview(): Observable<() => MicroK8sOverview | Promise<MicroK8sOverview>> {
+    return this.apollo.watchQuery<IQuery>(
+      {
+        query: GetMicroK8sOverview
+      }
+    ).valueChanges.pipe(
+      map(result => result.data.getMicroK8sOverview)
     );
   }
 

@@ -3,10 +3,13 @@ import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ThemeService} from '../../core/theme.service';
+import {OverviewComponent} from "../../overview/overview.component";
+import {DashboardService} from "../../dashboard/dashboard.service";
 
 @Component({
   selector: 'app-navigation',
-  templateUrl: './navigation.component.html'
+  templateUrl: './navigation.component.html',
+  providers:[OverviewComponent, DashboardService]
 })
 export class NavigationComponent implements OnInit {
 
@@ -25,7 +28,8 @@ export class NavigationComponent implements OnInit {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private overviewComponent: OverviewComponent) {
   }
 
   ngOnInit(): void {
@@ -36,6 +40,11 @@ export class NavigationComponent implements OnInit {
     this.themeService.toggleTheme();
     this.isDarkTheme = this.themeService.getTheme();
     this.themeToggle.emit();
+  }
+
+  onOverviewClick(): void{
+    console.log('onOverviewClick');
+    this.overviewComponent.ngOnInit();
   }
 
 }

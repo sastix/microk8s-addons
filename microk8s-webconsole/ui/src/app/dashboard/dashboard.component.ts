@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('dashboard loaded');
     this.addOns$ = this.dashboardService.getAddons();
     this.services$ = this.dashboardService.getSnapInfo();
     this.power$ = this.dashboardService.getMicroK8sStatus();

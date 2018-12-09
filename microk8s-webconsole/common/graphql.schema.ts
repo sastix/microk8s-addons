@@ -16,6 +16,11 @@ export interface JournalCtlLog {
     _COMM?: string;
 }
 
+export interface MicroK8sOverview {
+    timestamp: string;
+    output: string;
+}
+
 export interface IMutation {
     setAddonStatus(name: string, enabled: boolean, password?: string): Addon | Promise<Addon>;
     setPower(enabled: boolean): Power | Promise<Power>;
@@ -30,6 +35,7 @@ export interface Power {
 
 export interface IQuery {
     getAddons(): Addon[] | Promise<Addon[]>;
+    getMicroK8sOverview(): MicroK8sOverview | Promise<MicroK8sOverview>;
     getPower(): Power | Promise<Power>;
     getServiceInfo(): ServiceInfo[] | Promise<ServiceInfo[]>;
     getServiceLogs(name: string, size: string): ServiceLogs | Promise<ServiceLogs>;
