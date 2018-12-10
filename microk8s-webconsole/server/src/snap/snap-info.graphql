@@ -1,0 +1,43 @@
+type ServiceInfo {
+    name: String!
+    mode: String!
+    status: String!
+}
+
+type ServiceLogs {
+    name: String!
+    logs: [JournalCtlLog]!
+}
+
+type JournalCtlLog {
+    MESSAGE: String
+    SYSLOG_IDENTIFIER: String
+    _HOSTNAME: String
+    _PID: String
+    _UID: String
+    _BOOT_ID: String
+    PRIORITY: String
+    _MACHINE_ID: String
+    _EXE: String
+    _COMM: String
+}
+
+type Query {
+    getServiceInfo: [ServiceInfo]
+}
+
+type Query {
+    getServiceLogs(name: String!, size: String!): ServiceLogs
+}
+
+type Mutation {
+    setServiceStatus(name: String!, enabled: Boolean!): ServiceInfo
+}
+
+type Mutation {
+    setServiceMode(name: String!, enabled: Boolean!): ServiceInfo
+}
+
+type Mutation {
+    restartService(name: String!): ServiceInfo
+}

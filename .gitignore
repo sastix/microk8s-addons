@@ -5,7 +5,7 @@ node_modules/
 .idea
 /.awcache
 /.vscode
-
+.idea
 # bundle
 packages/**/*.d.ts
 packages/**/*.js
@@ -29,3 +29,6 @@ yarn-error.log
 /coverage
 /.nyc_output
 build/config\.gypi
+microk8s-webconsole/server/ts-node-*
+microk8s-webconsole/ui/ui.output
+microk8s-webconsole/server/server.output

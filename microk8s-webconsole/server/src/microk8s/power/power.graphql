@@ -1,0 +1,11 @@
+type Power {
+    running: Boolean!
+}
+
+type Query {
+    getPower: Power
+}
+
+type Mutation {
+    setPower(enabled: Boolean!): Power
+}
