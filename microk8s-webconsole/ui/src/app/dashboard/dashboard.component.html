@@ -1,0 +1,64 @@
+<div>
+  <div fxLayout="row">
+    <h1 class="mat-h1">Dashboard</h1>
+    <div fxFlex></div>
+    <div *ngIf="power$ | async as power; else loadingPower">
+      <button mat-mini-fab
+              class="power-button"
+              [matTooltip]="power.running ? 'Stop MicroK8s' : 'Start MicroK8s'"
+              matTooltipPosition="left"
+              [color]="power.running ? 'accent' : 'warn'"
+              (click)="onPowerClick(!power.running)">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </div>
+    <ng-template #loadingPower>
+      <mat-spinner mode="indeterminate" diameter="30" color="primary"></mat-spinner>
+    </ng-template>
+  </div>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div class="card-container" fxFlex="50%" fxFlex.lt-md="100%">
+        <app-dashboard-card title="Add Ons" *ngIf="(power$ | async)?.running; else microK8sNotRunning">
+          <div *ngIf="addOns$ | async as addOns; else loadingAddOns;">
+            <mat-accordion multi="true">
+              <div *ngFor="let addOn of addOns" fxLayout="column">
+                <app-add-on class="mt-1" [addOn]="addOn"></app-add-on>
+              </div>
+            </mat-accordion>
+          </div>
+          <ng-template #loadingAddOns>
+            <app-loading [diameter]="100"></app-loading>
+          </ng-template>
+        </app-dashboard-card>
+        <ng-template #microK8sNotRunning>
+          <app-dashboard-card title="MicroK8s is not running">
+            <div fxLayout="column">
+              <div>
+                <p>Please start MicroK8s in order to see available add ons!</p>
+                <p>
+                  You can do that either by clicking the power button on the top right corner, or by
+                  firing up a terminal and running <strong>microk8s.start</strong> command.
+                </p>
+              </div>
+            </div>
+          </app-dashboard-card>
+        </ng-template>
+      </div>
+      <div class="card-container" fxFlex="50%" fxFlex.lt-md="100%">
+        <app-dashboard-card title="Services">
+          <div *ngIf="services$ | async as services; else loadingServices;">
+            <mat-accordion multi="true">
+              <div *ngFor="let service of services" fxLayout="column">
+                <app-service-info class="mt-1" [service]="service"></app-service-info>
+              </div>
+            </mat-accordion>
+          </div>
+          <ng-template #loadingServices>
+            <app-loading [diameter]="100"></app-loading>
+          </ng-template>
+        </app-dashboard-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SnapService } from './snap.service';
 
-describe('serviceInfo', () => {
+describe('ServiceInfo', () => {
   let service: SnapService;
   
   beforeAll(async () => {

@@ -1,16 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import {promisify} from "util";
-import {execFile} from "child_process";
+import { promisify } from 'util';
+import { exec } from 'child_process';
 
-const exec_promise = promisify(execFile);
+const exec_promise = promisify(exec);
 
 @Injectable()
 export class ShellService {
 
-    async execCommand(cmd: string, args: string []): Promise<string> {
-        const { stdout, stderr } = await exec_promise(cmd,  args);
-
-        return stdout;
+    async execCommand(cmd: string, password?: string): Promise<string> {
+        if (password){
+            // TODO: Possibly remove
+            const command = `echo ${password} | sudo -S ${cmd}`;
+            const { stdout, stderr } = await exec_promise(command);
+            return stdout;
+        } else {
+            const command = `${cmd}`;
+            const { stdout, stderr } = await exec_promise(command);
+            return stdout;
+        }
     }
-
 }
