@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# IDE
+.idea
+/.awcache
+/.vscode
+.idea
+# bundle
+packages/**/*.d.ts
+packages/**/*.js
+
+# misc
+.DS_Store
+lerna-debug.log
+npm-debug.log
+yarn-error.log
+/**/npm-debug.log
+/packages/**/.npmignore
+/packages/**/LICENSE
+
+# example
+/quick-start
+/example_dist
+/example
+
+# tests
+/test
+/coverage
+/.nyc_output
+build/config\.gypi
+microk8s-webconsole/server/ts-node-*
+microk8s-webconsole/ui/ui.output
+microk8s-webconsole/server/server.output

@@ -1,0 +1,21 @@
+type Addon {
+    name: String!
+    enabled: Boolean!
+}
+
+type Query {
+    getAddons: [Addon]
+}
+
+type Mutation {
+    setAddonStatus(name: String!, enabled: Boolean!, password: String): Addon
+}
+
+type MicroK8sOverview {
+    timestamp: String!
+    output: String!
+}
+
+type Query {
+    getMicroK8sOverview: MicroK8sOverview
+}

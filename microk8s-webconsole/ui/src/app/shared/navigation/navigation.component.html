@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="!(isHandset$ | async)">
+    <mat-toolbar>
+      <span>Menu</span>
+      <div fxFlex></div>
+      <div fxLayout="row">
+        <mat-icon class="theme-slider-icon white-theme-icon">brightness_7</mat-icon>
+        <mat-slide-toggle color="accent" [checked]="isDarkTheme" (toggleChange)="onThemeToggle()">
+        </mat-slide-toggle>
+        <mat-icon class="theme-slider-icon dark-theme-icon">brightness_2</mat-icon>
+      </div>
+    </mat-toolbar>
+    <mat-nav-list>
+
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['dashboard']">
+          <mat-icon>dashboard</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{dashboardLink}}</div>
+        </a>
+      </div>
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['overview']">
+          <mat-icon>developer_board</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span" (click)="onOverviewClick()">{{overviewLinkTitle}}</div>
+        </a>
+      </div>
+
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['myservices']">
+          <mat-icon>computer</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{myServicesLinkTitle}}</div>
+        </a>
+      </div>
+
+      <div mat-list-item>
+        <a mat-list-item [routerLink]="['about']">
+          <mat-icon>info</mat-icon>
+          <div fxFlex fxLayoutAlign="center center" class="sidenav-span">{{aboutLinkTitle}}</div>
+        </a>
+      </div>
+
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>{{ appTitle }}</span>
+    </mat-toolbar>
+    <div class="container">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

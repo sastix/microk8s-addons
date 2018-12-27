@@ -1,0 +1,17 @@
+@import "variables";
+
+.container {
+  padding: $container-padding;
+}
+
+.loading-spinner-container {
+  padding: $spinner-container-padding;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
