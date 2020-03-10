@@ -4,7 +4,7 @@
     <div fxFlex></div>
 
   </div>
-  <div *ngIf="microK8sOverview$ | async as microK8sOverview; else loadingMicroK8sOverview">
+  <div *ngIf="microK8sOverview$ | async as microK8sOverview;">
     <h3>{{microK8sOverview.timestamp}}</h3>
     <pre>
       {{microK8sOverview.output}}
