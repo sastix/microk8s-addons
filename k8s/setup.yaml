@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: microdash
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: microdash
+  name: microdash
+  namespace: microdash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microdash
+  template:
+    metadata:
+      labels:
+        app: microdash
+    spec:
+      containers:
+      - image: sastix/microdash-server:1.0
+        name: microdash-server
+      - image: sastix/microdash:1.0
+        name: microdash
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microdash-service
+  namespace: microdash
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: microdash
