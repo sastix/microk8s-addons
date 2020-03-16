@@ -26,7 +26,7 @@ export class AddOnComponent implements OnInit {
   onToggleChange(event: MatSlideToggleChange, addOn: Addon): void {
     this.dashboardService.setAddonStatus(addOn.name, event.checked)
       .subscribe(value => {
-        this.addOn = value as AddOnModel;
+        this.addOn = value as unknown as AddOnModel;
         this.setAddonInfo(this.addOn);
       });
 

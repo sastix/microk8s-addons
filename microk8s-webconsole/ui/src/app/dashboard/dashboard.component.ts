@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   addOns$: Observable<() => Addon[] | Promise<Addon[]>>;
   services$: Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>>;
-  power$: Observable<() => Power | Promise<Power>>;
+  power$: Observable<(enabled: boolean) => (Power | Promise<Power>)>;
 
   constructor(private dashboardService: DashboardService) {
   }

@@ -9,7 +9,7 @@ import {MatSlideToggleChange} from "@angular/material";
 })
 export class ServiceInfoComponent {
 
-  @Input() service: ServiceInfo;
+  @Input() service: (name: string, enabled: boolean) => (ServiceInfo | Promise<ServiceInfo>);
 
   constructor(private dashboardService: DashboardService) {
   }

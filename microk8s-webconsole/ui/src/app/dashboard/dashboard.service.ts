@@ -49,7 +49,7 @@ export class DashboardService {
     );
   }
 
-  setAddonStatus(name: string, enabled: boolean): Observable<Addon> {
+  setAddonStatus(name: string, enabled: boolean): Observable<(name: string, enabled: boolean, password?: string) => (Addon | Promise<Addon>)> {
     return this.apollo.mutate<IMutation>({
       mutation: SetAddonStatus,
       variables: {
@@ -75,7 +75,7 @@ export class DashboardService {
       );
   }
 
-  setMicroK8sStatus(enabled: boolean): Observable<() => Power | Promise<Power>> {
+  setMicroK8sStatus(enabled: boolean): Observable<(enabled: boolean) => (Power | Promise<Power>)> {
     return this.apollo.mutate<IMutation>({
       mutation: SetMicroK8sPower,
       variables: {
@@ -87,7 +87,7 @@ export class DashboardService {
     );
   }
 
-  restartService(serviceName: string): Observable<ServiceInfo> {
+  restartService(serviceName: string): Observable<(name: string) => (ServiceInfo | Promise<ServiceInfo>)> {
     return this.apollo.mutate<IMutation>(
       {
         mutation: RestartService,
@@ -100,7 +100,7 @@ export class DashboardService {
     );
   }
 
-  setServiceMode(serviceName: string, enabled: boolean): Observable<ServiceInfo> {
+  setServiceMode(serviceName: string, enabled: boolean): Observable<(name: string, enabled: boolean) => (ServiceInfo | Promise<ServiceInfo>)> {
     return this.apollo.mutate<IMutation>(
       {
         mutation: SetServiceMode,
@@ -114,7 +114,7 @@ export class DashboardService {
     );
   }
 
-  setServiceStatus(serviceName: string, enabled: boolean): Observable<ServiceInfo> {
+  setServiceStatus(serviceName: string, enabled: boolean): Observable<(name: string, enabled: boolean) => (ServiceInfo | Promise<ServiceInfo>)> {
     return this.apollo.mutate<IMutation>(
       {
         mutation: SetServiceStatus,
