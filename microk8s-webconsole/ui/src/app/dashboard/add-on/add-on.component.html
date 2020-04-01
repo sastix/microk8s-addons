@@ -6,8 +6,8 @@
       <!--</div>-->
       <div>
         <mat-slide-toggle matTooltipPosition="after"
-                          [matTooltip]="addOn.enabled ? 'Disable': 'Enable'"
-                          [color]="addOn.enabled ? 'accent' : 'warn'" [checked]="addOn.enabled"
+                          [matTooltip]="addOn.status === 'enabled' ? 'Disable': 'Enable'"
+                          [color]="addOn.status  === 'enabled' ? 'accent' : 'warn'" [checked]="addOn.status === 'enabled'"
                           (change)="onToggleChange($event, addOn);" (click)="$event.stopPropagation();">
           {{addOn.name}}
         </mat-slide-toggle>
@@ -19,5 +19,10 @@
       </div>
     </div>
   </mat-expansion-panel-header>
-  <p [innerHtml]="addOn.info"></p>
+  <p [innerHtml]="addOn.description"></p>
+  <div *ngIf="logs !== ''">
+    <h4>Logs</h4>
+    <app-logs [logs]="logs"></app-logs>
+  </div>
+
 </mat-expansion-panel>

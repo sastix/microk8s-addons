@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from '../dashboard/dashboard.service';
-import {Observable} from "rxjs";
-import {MicroK8sOverview} from "@common/graphql.schema";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-overview',
@@ -11,13 +10,14 @@ import {MicroK8sOverview} from "@common/graphql.schema";
 })
 
 export class OverviewComponent implements OnInit {
+  overviewTitle = 'Overview';
+  microK8sOverview$: Observable<string>;
+
   constructor(private dashboardService: DashboardService) {
   }
-  overviewTitle = 'Overview';
-  microK8sOverview$: Observable<() => MicroK8sOverview | Promise<MicroK8sOverview>>;
+
   ngOnInit(): void {
     this.microK8sOverview$ = this.dashboardService.getMicroK8sOverview();
-    console.log('overview - ngOnInit');
   }
 
 

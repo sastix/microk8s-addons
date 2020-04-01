@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../core/api.service";
-import {Observable} from "rxjs";
-import {MicroK8sOverview} from "@common/graphql.schema";
-import {Version} from "@common/models/version.interface";
+import {ApiService} from '../core/api.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-about',
@@ -11,14 +9,14 @@ import {Version} from "@common/models/version.interface";
 
 export class AboutComponent implements OnInit {
   aboutTitle = 'About MicroK8s WebConsole';
-  mversion$: Observable<() => Version | Promise<Version>>;
+  mversion$: Observable<string>;
 
-  versionMicrok8s: string;
   versionWebConsole: string;
-  constructor(private api: ApiService) { }
+
+  constructor(private apiService: ApiService) { }
+
   ngOnInit(): void {
-    this.mversion$ = this.api.get('version');
-    this.mversion$.subscribe(val => {this.versionMicrok8s = val['microk8s']; this.versionWebConsole = val['webconsole']});
+    this.mversion$ = this.apiService.post('version', {callback: 'xyztoken'}, null, 'text');
   }
 
 }

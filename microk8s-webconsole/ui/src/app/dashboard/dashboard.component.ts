@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Addon, Power, ServiceInfo} from '@common/graphql.schema';
 import {DashboardService} from './dashboard.service';
+import {Addon} from '../core/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +9,9 @@ import {DashboardService} from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  addOns$: Observable<() => Addon[] | Promise<Addon[]>>;
-  services$: Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>>;
-  power$: Observable<(enabled: boolean) => (Power | Promise<Power>)>;
+  addOns$: Observable<Addon[]>;
+  services$: Observable<Object>;
+  power$: Observable<boolean>;
 
   constructor(private dashboardService: DashboardService) {
   }

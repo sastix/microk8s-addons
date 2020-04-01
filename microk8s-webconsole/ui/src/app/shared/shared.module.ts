@@ -11,10 +11,11 @@ import {CoreModule} from '../core/core.module';
 import {AboutComponent} from "../about/about.component";
 import {OverviewComponent} from "../overview/overview.component";
 import {MyServicesComponent} from "../myservices/myservices.component";
+import { LogsComponent } from './logs/logs.component';
 
 
 @NgModule({
-  declarations: [NavigationComponent, LoadingComponent, AboutComponent, OverviewComponent, MyServicesComponent],
+  declarations: [NavigationComponent, LoadingComponent, AboutComponent, OverviewComponent, MyServicesComponent, LogsComponent],
   imports: [
     CommonModule,
     CoreModule,
@@ -24,20 +25,21 @@ import {MyServicesComponent} from "../myservices/myservices.component";
     ReactiveFormsModule,
     RouterModule,
   ],
-  exports: [
-    CoreModule,
-    CommonModule,
-    LayoutModule,
-    LayoutModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    NavigationComponent,
-    AboutComponent,
-    OverviewComponent,
-    MyServicesComponent,
-    FlexLayoutModule,
-    LoadingComponent
-  ]
+    exports: [
+        CoreModule,
+        CommonModule,
+        LayoutModule,
+        LayoutModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        NavigationComponent,
+        AboutComponent,
+        OverviewComponent,
+        MyServicesComponent,
+        FlexLayoutModule,
+        LoadingComponent,
+        LogsComponent
+    ]
 })
 export class SharedModule {
 }

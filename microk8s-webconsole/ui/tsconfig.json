@@ -8,6 +8,14 @@
       ],
       "@core/*": [
         "./app/core/*"
+      ],
+      "client-lib": [
+        "dist/client-lib/client-lib",
+        "dist/client-lib"
+      ],
+      "client": [
+        "dist/client/client",
+        "dist/client"
       ]
     },
     "outDir": "./dist/out-tsc",

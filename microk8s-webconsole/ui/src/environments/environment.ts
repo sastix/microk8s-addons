@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://127.0.0.1:25000/cluster/api/v1.0'
 };
 
 /*

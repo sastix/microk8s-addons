@@ -1,131 +1,135 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Apollo} from 'apollo-angular';
-import {Addon, IMutation, IQuery, MicroK8sOverview, Power, ServiceInfo} from '@common/graphql.schema';
-import {map, share} from 'rxjs/operators';
-import {
-  GetAddOns, GetMicroK8sOverview,
-  GetMicroK8sPower,
-  GetServiceInfo,
-  RestartService,
-  SetAddonStatus,
-  SetMicroK8sPower, SetServiceMode, SetServiceStatus
-} from './dashboard.gql';
+import {from, Observable, of} from 'rxjs';
+
+import {catchError, map, mergeMap, toArray} from 'rxjs/operators';
+import {ApiService} from '../core/api.service';
+import {HttpResponse} from '@angular/common/http';
+import {Addon, AddonStatus, ServiceInfo, Status} from '../core/models';
 
 @Injectable()
 export class DashboardService {
 
-  constructor(private apollo: Apollo) {
+  constructor(private apiService: ApiService) {
   }
 
-  getAddons(): Observable<() => Addon[] | Promise<Addon[]>> {
-    return this.apollo.watchQuery<IQuery>(
-      {
-        query: GetAddOns
-      }
-    ).valueChanges
+  getAddons(): Observable<Addon[]> {
+    return this.apiService.post('status', {callback: 'xyztoken'})
+      .pipe(map((r: HttpResponse<Status>) => r.body.addons));
+  }
+
+  getSnapInfo(): Observable<Object> {
+    return this.apiService.post('services', {callback: 'xyztoken'})
       .pipe(
-        map(({data}) => data.getAddons)
+        mergeMap((r: HttpResponse<Object>) => from(Object.entries(r.body))),
+        map((s: Array<[string, string]>) => new Object({
+          name: s[0],
+          mode: s[1].toString().split(',')[1].trim(),
+          status: s[1].toString().split(',')[2].trim()
+        })),
+        toArray()
       );
   }
 
-  getSnapInfo(): Observable<() => ServiceInfo[] | Promise<ServiceInfo[]>> {
-    return this.apollo.watchQuery<IQuery>(
-      {
-        query: GetServiceInfo
-      }
-    ).valueChanges.pipe(
-      map(result => result.data.getServiceInfo)
-    );
-  }
-
-  getMicroK8sOverview(): Observable<() => MicroK8sOverview | Promise<MicroK8sOverview>> {
-    return this.apollo.watchQuery<IQuery>(
-      {
-        query: GetMicroK8sOverview
-      }
-    ).valueChanges.pipe(
-      map(result => result.data.getMicroK8sOverview)
-    );
-  }
-
-  setAddonStatus(name: string, enabled: boolean): Observable<(name: string, enabled: boolean, password?: string) => (Addon | Promise<Addon>)> {
-    return this.apollo.mutate<IMutation>({
-      mutation: SetAddonStatus,
-      variables: {
-        name: name,
-        enabled: enabled
-      }
-    }).pipe(
-      map(result => {
-        return result.data.setAddonStatus;
-      })
-    );
-  }
-
-  getMicroK8sStatus(): Observable<() => Power | Promise<Power>> {
-    return this.apollo.watchQuery<IQuery>(
-      {
-        query: GetMicroK8sPower
-      }
-    ).valueChanges
+  getMicroK8sOverview(): Observable<string> {
+    return this.apiService.post('overview', {callback: 'xyztoken'}, null, 'text')
       .pipe(
-        share(),
-        map(result => result.data.getPower)
+        map((r: HttpResponse<Object>) => r.body.toString())
       );
   }
 
-  setMicroK8sStatus(enabled: boolean): Observable<(enabled: boolean) => (Power | Promise<Power>)> {
-    return this.apollo.mutate<IMutation>({
-      mutation: SetMicroK8sPower,
-      variables: {
-        enabled: enabled
-      }
-    }).pipe(
-      share(),
-      map(result => result.data.setPower)
-    );
+  setAddonStatus(name: string, enabled: boolean): Observable<AddonStatus> {
+    if (enabled) {
+      return this.apiService.post('addon/enable', {callback: 'xyztoken', addon: name}, null, 'text')
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({status: r.status, logs: r.body}))
+        );
+    } else {
+      return this.apiService.post('addon/disable', {callback: 'xyztoken', addon: name}, null, 'text')
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({status: r.status, logs: r.body}))
+        );
+    }
   }
 
-  restartService(serviceName: string): Observable<(name: string) => (ServiceInfo | Promise<ServiceInfo>)> {
-    return this.apollo.mutate<IMutation>(
-      {
-        mutation: RestartService,
-        variables: {
-          name: serviceName
-        }
-      }
-    ).pipe(
-      map(result => result.data.restartService)
-    );
+  getMicroK8sStatus(): Observable<boolean> {
+    return this.apiService.post('status', {callback: 'xyztoken'})
+      .pipe(
+        map((r: HttpResponse<Object>) => r.body['microk8s']['running']),
+        catchError((e) => {
+          console.log(e);
+          return of(false);
+        })
+      );
   }
 
-  setServiceMode(serviceName: string, enabled: boolean): Observable<(name: string, enabled: boolean) => (ServiceInfo | Promise<ServiceInfo>)> {
-    return this.apollo.mutate<IMutation>(
-      {
-        mutation: SetServiceMode,
-        variables: {
-          name: serviceName,
-          enabled: enabled
-        }
-      }
-    ).pipe(
-      map(result => result.data.setServiceMode)
-    );
+  setMicroK8sStatus(enabled: boolean): Observable<boolean> {
+    if (enabled) {
+      return this.apiService.post('start', {callback: 'xyztoken'}, null, 'text')
+        .pipe(
+          mergeMap(() => this.getMicroK8sStatus())
+        );
+    } else {
+      return this.apiService.post('stop', {callback: 'xyztoken'}, null, 'text')
+        .pipe(
+          mergeMap(() => of(false))
+        );
+    }
+
   }
 
-  setServiceStatus(serviceName: string, enabled: boolean): Observable<(name: string, enabled: boolean) => (ServiceInfo | Promise<ServiceInfo>)> {
-    return this.apollo.mutate<IMutation>(
-      {
-        mutation: SetServiceStatus,
-        variables: {
-          name: serviceName,
-          enabled: enabled
-        }
-      }
-    ).pipe(
-      map(result => result.data.setServiceStatus)
-    );
+  restartService(service: ServiceInfo): Observable<ServiceInfo> {
+    return this.apiService.post('service/restart', {callback: 'xyztoken', service: service.name})
+      .pipe(
+        map((r: HttpResponse<Object>) => Object({
+          name: service.name,
+          status: service.status = (r.status === 200) ? 'active' : 'inactive',
+          mode: service.mode
+        }) as ServiceInfo)
+      );
+  }
+
+  setServiceMode(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
+    if (enabled) {
+      return this.apiService.post('service/enable', {callback: 'xyztoken', service: service.name})
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({
+            name: service.name,
+            status: service.status,
+            mode: service.mode = (r.status === 200) ? 'enabled' : 'disabled',
+          }) as ServiceInfo)
+        );
+    } else {
+      return this.apiService.post('service/disable', {callback: 'xyztoken', service: service.name})
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({
+            name: service.name,
+            status: service.status,
+            mode: service.mode = (r.status === 200) ? 'disabled' : 'enabled',
+          }) as ServiceInfo)
+        );
+    }
+  }
+
+  setServiceStatus(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
+    if (enabled) {
+      return this.apiService.post('service/start', {callback: 'xyztoken', service: service.name})
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({
+            name: service.name,
+            status: service.status = (r.status === 200) ? 'active' : 'inactive',
+            mode: service.mode
+          }) as ServiceInfo)
+        );
+    } else {
+      return this.apiService.post('service/stop', {callback: 'xyztoken', service: service.name})
+        .pipe(
+          map((r: HttpResponse<Object>) => Object({
+            name: service.name,
+            status: service.status = (r.status === 200) ? 'inactive' : 'active',
+            mode: service.mode
+          }) as ServiceInfo)
+        );
+    }
   }
 }
 

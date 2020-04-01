@@ -5,10 +5,10 @@
     <div *ngIf="power$ | async as power; else loadingPower">
       <button mat-mini-fab
               class="power-button"
-              [matTooltip]="power.running ? 'Stop MicroK8s' : 'Start MicroK8s'"
+              [matTooltip]="power ? 'Stop MicroK8s' : 'Start MicroK8s'"
               matTooltipPosition="left"
-              [color]="power.running ? 'accent' : 'warn'"
-              (click)="onPowerClick(!power.running)">
+              [color]="power ? 'accent' : 'warn'"
+              (click)="onPowerClick(!power)">
         <mat-icon>power_settings_new</mat-icon>
       </button>
     </div>
@@ -19,7 +19,7 @@
   <div fxLayout="column">
     <div fxLayout="row" fxLayout.lt-md="column">
       <div class="card-container" fxFlex="50%" fxFlex.lt-md="100%">
-        <app-dashboard-card title="Add Ons" *ngIf="(power$ | async)?.running; else microK8sNotRunning">
+        <app-dashboard-card title="Add Ons" *ngIf="(power$ | async); else microK8sNotRunning">
           <div *ngIf="addOns$ | async as addOns; else loadingAddOns;">
             <mat-accordion multi="true">
               <div *ngFor="let addOn of addOns" fxLayout="column">

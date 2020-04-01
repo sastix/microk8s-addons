@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {environment} from "../../environments/environment";
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,15 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<any> {
+  post(path: string, body: Object = {}, params: HttpParams = new HttpParams(), responseType?): Observable<any> {
 
     return this.http.post(`${environment.apiUrl}/${path}`, JSON.stringify(body),
-      {headers: new HttpHeaders({'Content-Type': 'application/json'}), params})
+      {
+        headers: new HttpHeaders({'Content-Type': 'application/json'}),
+        params,
+        responseType: responseType,
+        observe: 'response'
+      })
       .pipe(catchError(this.formatErrors));
   }
 

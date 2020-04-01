@@ -19,8 +19,8 @@
         </button>
         <button mat-icon-button
                 matTooltipPosition="right"
-                [matTooltip]="'Enable service'"
-                [color]="service.mode == 'enabled' ? 'accent' : 'warn'"
+                [matTooltip]="service.mode === 'enabled' ? 'Disable service' : 'Enable service'"
+                [color]="service.mode === 'enabled' ? 'accent' : 'warn'"
                 (click)="onPowerClick(service, $event)">
           <mat-icon aria-label="Enable/Disable service">power_settings_new</mat-icon>
         </button>
