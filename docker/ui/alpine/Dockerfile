@@ -1,12 +1,12 @@
-FROM node:8-slim as builder
+FROM node:12-buster-slim as builder
 WORKDIR /app
-RUN mkdir ./ui && mkdir ./common
+RUN mkdir ./ui
+RUN ls
 ADD ./microk8s-webconsole/ui /app/ui
-ADD ./microk8s-webconsole/common /app/common
-RUN cd /app/ui && npm install
-RUN npm install -g @angular/cli@7.3.9
-RUN npm -v && node -v
-RUN cd /app/ui && ng build --prod
+RUN cd /app/ui && yarn
+RUN npm install -g @angular/cli@9.0.1
+RUN npm -v && node -v && yarn -v
+RUN cd /app/ui && yarn build --prod
 # NGINX
 FROM nginx:alpine as ship
 RUN rm -rf /usr/share/nginx/html/*

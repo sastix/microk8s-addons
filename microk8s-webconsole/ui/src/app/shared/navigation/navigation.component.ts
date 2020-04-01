@@ -13,7 +13,7 @@ import {DashboardService} from "../../dashboard/dashboard.service";
 })
 export class NavigationComponent implements OnInit {
 
-  appTitle = 'MicroK8s Web Console';
+  appTitle = 'MicroDash';
   dashboardLink = 'Dashboard';
   overviewLinkTitle = 'Overview';
   myServicesLinkTitle = 'My Services';
@@ -42,7 +42,7 @@ export class NavigationComponent implements OnInit {
     this.themeToggle.emit();
   }
 
-  onOverviewClick(): void{
+  onOverviewClick(): void {
     console.log('onOverviewClick');
     this.overviewComponent.ngOnInit();
   }

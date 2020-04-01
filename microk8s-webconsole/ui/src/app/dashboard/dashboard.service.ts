@@ -77,17 +77,6 @@ export class DashboardService {
 
   }
 
-  restartService(service: ServiceInfo): Observable<ServiceInfo> {
-    return this.apiService.post('service/restart', {callback: 'xyztoken', service: service.name})
-      .pipe(
-        map((r: HttpResponse<Object>) => Object({
-          name: service.name,
-          status: service.status = (r.status === 200) ? 'active' : 'inactive',
-          mode: service.mode
-        }) as ServiceInfo)
-      );
-  }
-
   setServiceMode(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
     if (enabled) {
       return this.apiService.post('service/enable', {callback: 'xyztoken', service: service.name})
