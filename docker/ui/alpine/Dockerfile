@@ -10,5 +10,7 @@ RUN cd /app/ui && yarn build --prod
 # NGINX
 FROM nginx:alpine as ship
 RUN rm -rf /usr/share/nginx/html/*
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d
 COPY --from=builder /app/ui/dist/microk8s-webconsole-ui /usr/share/nginx/html
 RUN chown -R 101:101 /usr/share/nginx/html

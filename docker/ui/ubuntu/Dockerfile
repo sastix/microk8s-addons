@@ -21,8 +21,9 @@ RUN apt-get update
 RUN apt-get -y install nginx
 RUN rm -rf /usr/share/nginx/html/*
 RUN rm -rf /var/www/html/*
-COPY --from=builder /home/app/ui/dist/microk8s-webconsole-ui /var/www/html
-#RUN cp -r /home/app/ui/dist/microk8s-webconsole-ui/* /var/www/html/
+RUN rm /etc/nginx/sites-enabled/default
+COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d/microdash.conf
+COPY --from=builder /home/app/ui/dist/microk8s-webconsole-ui /usr/share/nginx/html
 RUN rm -rf /home/app/*
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
