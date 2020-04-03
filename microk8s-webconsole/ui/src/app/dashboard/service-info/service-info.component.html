@@ -27,7 +27,10 @@
       </div>
     </div>
   </mat-expansion-panel-header>
-  <p>
-    logs will go here!
-  </p>
+  <div *ngIf="logs$ | async as logs">
+    <h4>Logs*</h4>
+    <app-logs [logs]="logs"></app-logs>
+    <span>* last 20 logs</span>
+  </div>
+
 </mat-expansion-panel>

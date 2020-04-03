@@ -1,7 +1,9 @@
-p {
+pre {
   font-family: 'Ubuntu Mono', monospace;
   background-color: #424242;
   color: white;
   padding: 16px;
   border-radius: 4px;
+  overflow: auto;
+  max-height: 500px;
 }

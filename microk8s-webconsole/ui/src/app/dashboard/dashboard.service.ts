@@ -120,6 +120,13 @@ export class DashboardService {
         );
     }
   }
+
+  getServiceLogs(service: ServiceInfo): Observable<string> {
+    return this.apiService.post('service/logs', {callback: 'xyztoken', service: service.name, lines: 20}, null, 'text')
+      .pipe(
+        map((r: HttpResponse<Object>) => r.body as string)
+      );
+  }
 }
 
 
