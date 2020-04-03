@@ -8,6 +8,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
+  token: string;
 
   constructor(private http: HttpClient) {
   }
@@ -21,6 +22,11 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
+  getToken(params: HttpParams = new HttpParams(), responseType?): Observable<any> {
+    return this.http.get(`/cb/token.txt`, {params, responseType})
+      .pipe(catchError(this.formatErrors));
+  }
+
   put(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.put(`${environment.apiUrl}/${path}`, JSON.stringify(body),
       {headers: new HttpHeaders({'Content-Type': 'application/json'}), params})
@@ -28,7 +34,7 @@ export class ApiService {
   }
 
   post(path: string, body: Object = {}, params: HttpParams = new HttpParams(), responseType?): Observable<any> {
-
+    body['callback'] = this.token;
     return this.http.post(`${environment.apiUrl}/${path}`, JSON.stringify(body),
       {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),

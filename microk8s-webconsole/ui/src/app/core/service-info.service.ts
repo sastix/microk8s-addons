@@ -14,7 +14,7 @@ export class ServiceInfoService {
   }
 
   getServices(): Observable<ServiceInfo[]> {
-    return this.api.post('services', {callback: 'xyztoken'})
+    return this.api.post('services', { })
       .pipe(
         mergeMap((r: HttpResponse<Object>) => from(Object.entries(r.body))),
         map((s: Array<[string, string]>) => new Object({
@@ -27,7 +27,7 @@ export class ServiceInfoService {
   }
 
   restartService(service: ServiceInfo): Observable<ServiceInfo> {
-    return this.api.post('service/restart', {callback: 'xyztoken', service: service.name})
+    return this.api.post('service/restart', {service: service.name})
       .pipe(
         map((r: HttpResponse<Object>) => {
           console.log(r);
@@ -35,7 +35,7 @@ export class ServiceInfoService {
             name: service.name,
             status: service.status = (r.status === 200) ? 'active' : 'inactive',
             mode: service.mode
-          }) as ServiceInfo
+          }) as ServiceInfo;
         })
 
       );
