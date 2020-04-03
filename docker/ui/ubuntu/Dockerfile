@@ -20,6 +20,8 @@ USER root
 RUN apt-get update
 RUN apt-get -y install nginx
 RUN rm -rf /usr/share/nginx/html/*
+RUN mkdir /usr/share/nginx/html/cb
+RUN echo "xyztoken" > /usr/share/nginx/html/cb/token.txt
 RUN rm -rf /var/www/html/*
 RUN rm /etc/nginx/sites-enabled/default
 COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d/microdash.conf

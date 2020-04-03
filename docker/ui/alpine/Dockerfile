@@ -10,6 +10,8 @@ RUN cd /app/ui && yarn build --prod
 # NGINX
 FROM nginx:alpine as ship
 RUN rm -rf /usr/share/nginx/html/*
+RUN mkdir /usr/share/nginx/html/cb
+RUN echo "xyztoken" > /usr/share/nginx/html/cb/token.txt
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d
 COPY --from=builder /app/ui/dist/microk8s-webconsole-ui /usr/share/nginx/html
