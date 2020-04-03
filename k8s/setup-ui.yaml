@@ -25,7 +25,7 @@ spec:
         name: microdash
         volumeMounts:
         - name: token
-          mountPath: "/var/www/html/cb"
+          mountPath: "/usr/share/nginx/html/cb"
           readOnly: true
       volumes:
       - name: token
