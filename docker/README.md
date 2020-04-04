@@ -18,16 +18,30 @@ docker build -t 'sastix/microdash-server:1.0-slim' -f docker/server/alpine/Docke
 # Run docker image
 
 ## ui
+- With magic ip *
 ```
-docker run -p 80:80 microdash:1.0
+sudo ifconfig lo:1 10.0.2.2 up
+docker run -p 80:80 sastix/microdash:1.0
+# or
+docker run -p 80:80 sastix/microdash:1.0-slim
+```
+- With network host on
+```
+docker run -p 80:80 --network host sastix/microdash:1.0
+# map your own conf
+docker run -p 80:80 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf sastix/microdash:1.0-slim
 ```
 
-In case you want to test with the api running from your host:
-```
-docker run -p 80:80 --network host microdash:1.0
-docker run -p 80:80 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf microdash:1.0-slim
-```
+## * magic ip
 
+MicroDash will check with reverse proxy the host ip. When running locally this could be localhost or 127.0.0.1
+
+When in a container, we need the host ip to be something else than localhost. This is the reason of introducing the magic ip: 10.0.2.2
+
+In order to set it run:
+```
+sudo ifconfig lo:1 10.0.2.2 up
+```
 ## server
 ```
 docker run -p 3000:3000 microdash-server:1.0
