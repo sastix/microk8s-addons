@@ -10,7 +10,22 @@ You must have MicroK8s running:
 ```
 sudo snap install microk8s --edge --classic
 ```
+## Deploy MicroDash in MicroK8s 
 
+Under k8s folder you can deploy-in-microk8s.sh. Open a shell and run it:
+```
+cd k8s
+./deploy-in-microk8s.sh
+```
+
+Get all namespaces to find the ip:
+```
+microk8s.kubectl get all -A
+```
+![Screenshot](images/microdash-ip.png)
+
+Point to this ip in a browser url, eg:
+http://10.152.183.98
 ## Run in development mode
 The project uses angular and yarn. In order to run ('ng serve' mode) MicroDash at 4200 port run the following from a shell:
 ```
@@ -73,23 +88,7 @@ docker run -p 80:80 --network host -v /<path-to-project>/microk8s-addons/docker/
 # alpine
 docker run -p 80:80 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0-slim
 ```
-## Deploy MicroDash in MicroK8s 
 
-
-Under k8s folder you can deploy-in-microk8s.sh. Open a shell and run it:
-```
-cd k8s
-./deploy-in-microk8s.sh
-```
-
-Get all namespaces to find the ip:
-```
-microk8s.kubectl get all -A
-```
-![Screenshot](images/microdash-ip.png)
-
-Point to this ip in a browser url, eg:
-http://10.152.183.98
 
 # Links
  - [Kubernetes](https://kubernetes.io/)
