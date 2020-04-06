@@ -56,7 +56,7 @@ yarn start
 The UI will be available at http://localhost:4200
 
 **Important!!** 
->Angular is using @angular/common/http to make POST requests against the cluster-agent-api at https://127.0.0.1:25000/cluster/api/v1.0 which is under https using a self signed certificate. In order NOT to get the net::ERR_CERT_AUTHORITY_INVALID error on the browser, you have to trust the certificate by opening the swagger page at https://127.0.0.1:25000/swagger  - In Chrome select Advanced > Proceed to 127.0.0.1 (unsafe)
+>Angular is using @angular/common/http to make POST requests against the cluster-agent-api at https://127.0.0.1:25000/cluster/api/v1.0 which is under https using a self signed certificate. In order NOT to get the net::ERR_CERT_AUTHORITY_INVALID error in the browser, you have to trust the certificate by opening the swagger page at https://127.0.0.1:25000/swagger  - In Chrome select Advanced > Proceed to 127.0.0.1 (unsafe)
 
 Press Ctr+C to kill the running server in your shell
 
