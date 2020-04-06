@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 sudo apt-get install npm
-(cd microk8s-webconsole/server; npm install)
-(cd microk8s-webconsole/ui; npm install)
+(cd microdash/server; npm install)
+(cd microdash/ui; npm install)

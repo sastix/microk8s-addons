@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'microk8s-webconsole-ui'`, () => {
+  it(`should have as title 'microk8s-microdash-ui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('microk8s-webconsole-ui');
+    expect(app.title).toEqual('microk8s-microdash-ui');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to microk8s-webconsole-ui!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to microk8s-microdash-ui!');
   });
 });

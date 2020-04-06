@@ -1,5 +1,5 @@
 {
-  "name": "microk8s-webconsole-ui",
+  "name": "microk8s-microdash-ui",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",

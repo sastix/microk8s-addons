@@ -2,8 +2,8 @@ FROM ubuntu:bionic
 USER root
 WORKDIR /home/app
 RUN mkdir ./server && mkdir ./common
-ADD ./microk8s-webconsole/server /home/app/server
-ADD ./microk8s-webconsole/common /home/app/common
+ADD ./microdash/server /home/app/server
+ADD ./microdash/common /home/app/common
 RUN apt-get update
 RUN apt-get -y install curl gnupg
 RUN curl -sL https://deb.nodesource.com/setup_8.x  | bash -

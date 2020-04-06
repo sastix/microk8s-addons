@@ -35,9 +35,20 @@ sudo echo "xyztoken" >  /var/snap/microk8s/current/credentials/callback-token.tx
 ```
 When in development mode, angular uses the {"callback":"xyztoken"} by default, that is the reason for creating the file above
 
-The project uses angular and yarn. In order to run ('ng serve' mode) MicroDash at 4200 port run the following from a shell:
+Prerequisites:
+- Node 12 (use NVM)
+- Angular 9
+- Yarn
 ```
-cd microk8s-webconsole/ui
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+nvm install v12
+sudo npm install -g yarn
+sudo npm install -g @angular/cli@9.0.1
+```
+
+The project uses angular and yarn. In order to run MicroDash at 4200 port run the following from a shell:
+```
+cd microdash/ui
 yarn
 yarn start
 ```
@@ -51,7 +62,7 @@ Press Ctr+C to kill the running server in your shell
 
 In case you want to run it as a background service, locate start.sh under scripts folder and run it from a shell:
 ```
-cd microk8s-webconsole/ui
+cd microdash/ui
 yarn
 cd ../../scripts
 ./start.sh
@@ -62,7 +73,7 @@ ps -ef | grep "ng serve"
 kill <process_id>
 ```
 
-## Build and run in production mode using Docker
+## Build and run using Docker
 In this project you can find 2 Dockerfiles to build the angular code and run from an NGINX container. The [first](docker/ui/ubuntu/Dockerfile) is based on an ubuntu image and the [second](docker/ui/alpine/Dockerfile) on an alpine.
 
 ### Building the code:
@@ -93,7 +104,7 @@ docker run -p 80:80 sastix/microdash:1.0
 docker run -p 80:80 sastix/microdash:1.0-slim
 ```
 
-### Run the container using network host (and not magic ip)
+### Run the container using network host
 
 You must map your own NGINX config file (or use existing) through docker volume. 
 

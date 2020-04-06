@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "microk8s-webconsole-ui": {
+    "microk8s-microdash-ui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "dist/microk8s-webconsole-ui",
+            "outputPath": "dist/microk8s-microdash-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "microk8s-webconsole-ui:build"
+            "browserTarget": "microk8s-microdash-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "microk8s-webconsole-ui:build:production"
+              "browserTarget": "microk8s-microdash-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "microk8s-webconsole-ui:build"
+            "browserTarget": "microk8s-microdash-ui:build"
           }
         },
         "test": {
@@ -111,7 +111,7 @@
         }
       }
     },
-    "microk8s-webconsole-ui-e2e": {
+    "microk8s-microdash-ui-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -120,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "microk8s-webconsole-ui:serve"
+            "devServerTarget": "microk8s-microdash-ui:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "microk8s-webconsole-ui:serve:production"
+              "devServerTarget": "microk8s-microdash-ui:serve:production"
             }
           }
         },
@@ -220,5 +220,5 @@
       }
     }
   },
-  "defaultProject": "microk8s-webconsole-ui"
+  "defaultProject": "microk8s-microdash-ui"
 }

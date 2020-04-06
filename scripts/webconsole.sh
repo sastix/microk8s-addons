@@ -8,8 +8,8 @@ function cmd_detect {
 
 function run_npm {
   # Will run npm install in the server and ui
-  cd $PROJECT_HOME/../microk8s-webconsole/server && npm install
-  cd $PROJECT_HOME/../microk8s-webconsole/ui && npm install
+  cd $PROJECT_HOME/../microdash/server && npm install
+  cd $PROJECT_HOME/../microdash/ui && npm install
 }
 
 function install_dependecies {
@@ -33,15 +33,15 @@ function install_dependecies {
   run_npm
 }
 
-function start_webconsole {
+function start_microdash {
   # Start the frontend and the backend in background
   echo "Launching backend server..."
-  (cd $PROJECT_HOME/../microk8s-webconsole/server; echo $ROOT_PASSWORD | sudo -S npm run start:dev &> server.output &)
+  (cd $PROJECT_HOME/../microdash/server; echo $ROOT_PASSWORD | sudo -S npm run start:dev &> server.output &)
   echo "Launching frontend..."
-  (cd $PROJECT_HOME/../microk8s-webconsole/ui; npm run start &> ui.output &)
+  (cd $PROJECT_HOME/../microdash/ui; npm run start &> ui.output &)
 
-  # Detect the browser and launch the webconsole
-  echo "Detecting your browser and launching webconsole..."
+  # Detect the browser and launch the microdash
+  echo "Detecting your browser and launching microdash..."
   if [ -n "$BROWSER" ]; then
     $BROWSER https://localhost:4200
   else
@@ -60,11 +60,11 @@ read -p "Root password: " -s ROOT_PASSWORD
 while [[ $# -gt 0 ]] ; do
   case $1 in
     --start)
-      echo "Starting webconsole."
-      start_webconsole
+      echo "Starting microdash."
+      start_microdash
       ;;
     --stop)
-      echo "Stopping webconsole."
+      echo "Stopping microdash."
       # TODO
       ;;
     --installdeps)
