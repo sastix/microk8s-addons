@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS builder
+FROM ubuntu:bionic AS builder
 USER root
 WORKDIR /home/app
 RUN mkdir ./ui
@@ -11,7 +11,7 @@ RUN apt-get -y install nodejs
 RUN npm install -g yarn
 RUN cd /home/app/ui && yarn install
 RUN npm install -g @angular/cli@9.0.1
-RUN npm -v && node -v && yarn -v 
+RUN npm -v && node -v && yarn -v
 RUN cd /home/app/ui && yarn build --prod
 
 # NGINX

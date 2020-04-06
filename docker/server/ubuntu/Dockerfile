@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 USER root
 WORKDIR /home/app
 RUN mkdir ./server && mkdir ./common
