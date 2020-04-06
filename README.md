@@ -23,7 +23,6 @@ Press Ctr+C to kill the running server in your shell
 
 In case you want to run it as a background service, locate start.sh under scripts folder and run it from a shell:
 ```
-# Running yarn under microk8s-webconsole/ui folder is essential for this case too. Ommit of already ran
 cd microk8s-webconsole/ui
 yarn
 cd ../../scripts
