@@ -13,6 +13,6 @@ RUN rm -rf /usr/share/nginx/html/*
 RUN mkdir /usr/share/nginx/html/cb
 RUN echo "xyztoken" > /usr/share/nginx/html/cb/token.txt
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d
+COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d/microdash.conf
 COPY --from=builder /app/ui/dist/microk8s-webconsole-ui /usr/share/nginx/html
 RUN chown -R 101:101 /usr/share/nginx/html

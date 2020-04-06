@@ -31,4 +31,5 @@ yarn-error.log
 build/config\.gypi
 microk8s-webconsole/server/ts-node-*
 microk8s-webconsole/ui/ui.output
+scripts/microdash.log
 microk8s-webconsole/server/server.output
