@@ -12,7 +12,7 @@ sudo snap install microk8s --edge --classic
 ```
 ## Deploy MicroDash in MicroK8s 
 
-Under k8s folder you can deploy-in-microk8s.sh. Open a shell and run it:
+Under [k8s](k8s) folder you can find the [script](k8s/deploy-in-microk8s.sh) to deploy MicroDash. Open a shell and run:
 ```
 cd k8s
 ./deploy-in-microk8s.sh
@@ -24,7 +24,7 @@ microk8s.kubectl get all -A
 ```
 ![Screenshot](images/microdash-ip.png)
 
-Point to this ip in a browser url, eg:
+Point the browser to this ip, eg:
 http://10.152.183.98
 
 ## Run in development mode
