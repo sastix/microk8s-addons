@@ -49,7 +49,7 @@ ps -ef | grep "ng serve"
 kill <process_id>
 ```
 
-## (Build and) Run in production mode using Docker
+## Build and run in production mode using Docker
 In this project you can find 2 Dockerfiles to build the angular code and run from an NGINX container. The [first](docker/ui/ubuntu/Dockerfile) is based on an ubuntu image and the [second](docker/ui/alpine/Dockerfile) on an alpine.
 
 Building the code:
