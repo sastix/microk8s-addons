@@ -7,3 +7,9 @@ microk8s.kubectl create secret generic cb-token --from-file=./token.txt --namesp
 microk8s.kubectl -n microdash get secrets
 microk8s.kubectl -n microdash describe secrets/cb-token
 ```
+decode a secret:
+```
+microk8s.kubectl get secret cb-token -o yaml -n microdash
+# get the data base64 representation and run:
+echo '<BASE64_VALUE>' | base64 --decode
+```
