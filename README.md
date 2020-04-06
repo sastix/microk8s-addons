@@ -53,14 +53,14 @@ yarn
 yarn start
 ```
 
-The UI will be available at http://localhost:4200
+The UI will be available* at http://localhost:4200
 
-**Important!!** 
+**\*Important!!** 
 >Angular is using @angular/common/http to make POST requests against the cluster-agent-api at https://127.0.0.1:25000/cluster/api/v1.0 which is under https using a self signed certificate. In order NOT to get the net::ERR_CERT_AUTHORITY_INVALID error in the browser, you have to trust the certificate by opening the swagger page at https://127.0.0.1:25000/swagger  - In Chrome select Advanced > Proceed to 127.0.0.1 (unsafe)
 
 Press Ctr+C to kill the running server in your shell
 
-In case you want to run it as a background service, locate start.sh under scripts folder and run it from a shell:
+In case you want to run it as a background service, locate [start.sh](scripts/start.sh) under scripts folder and run it from a shell:
 ```
 cd microdash/ui
 yarn
