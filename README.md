@@ -6,10 +6,11 @@
 
 ## Requirements
 
-You must have MicroK8s installed and running:
+You must have MicroK8s installed and running \*\*:
 ```
 sudo snap install microk8s --edge --classic
 ```
+> \*\* Until this [PR](https://github.com/ubuntu/microk8s/pull/1076) will be merged to [master](https://github.com/ubuntu/microk8s) and released in the next MicroK8s version (maybe v1.19), you have to clone/checkout this [branch](https://github.com/sastix/microk8s/tree/feature/extend-cluster-agent-api) and install MicroK8s manually by following these [instructions](https://github.com/ubuntu/microk8s/blob/master/docs/build.md)
 ## Deploy MicroDash in MicroK8s 
 
 Under [k8s](k8s) folder you can find the [script](k8s/deploy-in-microk8s.sh) to deploy MicroDash. Open a shell and run:
@@ -89,7 +90,7 @@ For everything to work smoothly you have to enable the "magic ip" on your host, 
 
 Before running the container, make sure you have created the callback-token file in MicroK8s:
 ```
-sudo echo "xyztoken" >  /var/snap/microk8s/current/credentials/callback-token.txt
+sudo echo "xyztoken" > /var/snap/microk8s/current/credentials/callback-token.txt
 ```
 >Dockerized NGINX is exposing the callback-token with a default "xyztoken" value. In case you want to try a different value, connect at the container and update **/usr/share/nginx/html/cb/token.txt** with the preferred value. **DO NOT forget** to update **/var/snap/microk8s/current/credentials/callback-token.txt** with the same value 
 
