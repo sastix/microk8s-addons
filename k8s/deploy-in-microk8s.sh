@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Create secret token to be used by MicroDash UI
-
+set -e
 # the base bath '/var/snap/microk8s/current/' could also be retrieved from $SNAP_DATA
 CALLBACK_TOKEN_FILE="/var/snap/microk8s/current/credentials/callback-token.txt"
 
@@ -17,10 +17,23 @@ else
 fi
 # setup the magic ip so pod/container can see host
 sudo ifconfig lo:1 10.0.2.2 up
+KUBECTL="microk8s.kubectl"
+CHECK_NAMESPACE=$($KUBECTL get namespaces)
+if ! echo $CHECK_NAMESPACE | grep "microdash" >/dev/null
+then
+    echo "Creating microdash namespace since it does not exist"
+    $KUBECTL create namespace microdash
+fi
 
-microk8s.kubectl create namespace microdash
-microk8s.kubectl delete secret cb-token -n microdash
-microk8s.kubectl create secret generic cb-token --from-literal=token.txt="${TOKEN}" --namespace microdash
-microk8s.kubectl apply -f microdash.yaml
+CHECK_SECRET=$($KUBECTL -n microdash get secrets)
+if echo $CHECK_SECRET | grep "cb-token" >/dev/null
+then
+    echo "Delete existing cb-token secret under microdash namespace"
+    $KUBECTL delete secret cb-token -n microdash
+fi
 
+echo "Creating new cb-token secret under microdash namespace"
+$KUBECTL create secret generic cb-token --from-literal=token.txt="${TOKEN}" --namespace microdash
+$KUBECTL apply -f microdash.yaml
 
+echo "MicroDash enabled"
