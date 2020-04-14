@@ -24,15 +24,21 @@ spec:
       - image: sastix/microdash:1.0
         imagePullPolicy: Always
         name: microdash
-        volumeMounts:
-        - name: token
-          mountPath: "/usr/share/nginx/html/cb"
-          readOnly: true
-      volumes:
-      - name: token
-        secret:
-          secretName: cb-token
-          defaultMode: 511
+        env:
+          - name: CALLBACK_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: cb-token
+                key: token.txt
+#        volumeMounts:
+#        - name: token
+#          mountPath: "/usr/share/nginx/html/cb"
+#          readOnly: true
+#      volumes:
+#      - name: token
+#        secret:
+#          secretName: cb-token
+#          defaultMode: 511
 ---
 apiVersion: v1
 kind: Service

@@ -20,7 +20,7 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.versionMicroDash = environment.VERSION;
-    this.mversion$ = this.apiService.post('version', {callback: 'xyztoken'}, null, 'text')
+    this.mversion$ = this.apiService.post('version', {}, null, 'text')
       .pipe(
         map((r: HttpResponse<Object>) => r.body.toString())
       );

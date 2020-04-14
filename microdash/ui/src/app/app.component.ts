@@ -20,13 +20,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.isDarkTheme = this.themeService.getTheme();
     if (environment.devCallbackToken){
-      this.apiService.token = environment.devCallbackToken
-    }else {
-      this.apiService.getToken(null, 'text')
-        .pipe(
-          tap((token: string) => this.apiService.token = token),
-        ).subscribe();
-    }
+       this.apiService.token = environment.devCallbackToken
+    }//else {
+    //   this.apiService.getToken(null, 'text')
+    //     .pipe(
+    //       tap((token: string) => this.apiService.token = token),
+    //     ).subscribe();
+    // }
   }
 
   onThemeToggle() {

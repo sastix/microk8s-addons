@@ -34,7 +34,9 @@ export class ApiService {
   }
 
   post(path: string, body: Object = {}, params: HttpParams = new HttpParams(), responseType?): Observable<any> {
-    body['callback'] = this.token;
+    if(this.token) {
+      body['callback'] = this.token;
+    }
     return this.http.post(`${environment.apiUrl}/${path}`, JSON.stringify(body),
       {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
