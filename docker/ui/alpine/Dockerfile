@@ -15,6 +15,7 @@ RUN mkdir /usr/share/nginx/html/cb
 RUN rm /etc/nginx/conf.d/default.conf
 #COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d/microdash.conf
 COPY ./docker/ui/nginx/nginx.conf.template /etc/nginx/conf.d/microdash.conf.template
+COPY ./docker/ui/nginx/.htpasswd.template /etc/nginx/.htpasswd.template
 COPY ./docker/ui/nginx/docker-entrypoint.sh /
 COPY --from=builder /app/ui/dist/microk8s-microdash-ui /usr/share/nginx/html
 RUN apk add gettext

@@ -26,6 +26,7 @@ RUN rm -rf /var/www/html/*
 RUN rm /etc/nginx/sites-enabled/default
 #COPY ./docker/ui/nginx/nginx.conf /etc/nginx/conf.d/microdash.conf
 COPY ./docker/ui/nginx/nginx.conf.template /etc/nginx/conf.d/microdash.conf.template
+COPY ./docker/ui/nginx/.htpasswd.template /etc/nginx/.htpasswd.template
 COPY ./docker/ui/nginx/docker-entrypoint.sh /
 COPY --from=builder /home/app/ui/dist/microk8s-microdash-ui /usr/share/nginx/html
 RUN rm -rf /home/app/*
