@@ -10,7 +10,7 @@ You must have MicroK8s installed and running \*\*:
 ```
 sudo snap install microk8s --edge --classic
 ```
-> \*\* Until this [PR](https://github.com/ubuntu/microk8s/pull/1076) will be merged to [master](https://github.com/ubuntu/microk8s) and released in the next MicroK8s version (maybe v1.19), you have to clone/checkout this [branch](https://github.com/sastix/microk8s/tree/feature/extend-cluster-agent-api) and install MicroK8s manually by following these [instructions](https://github.com/ubuntu/microk8s/blob/master/docs/build.md)
+> \*\* Until this [PR](https://github.com/ubuntu/microk8s/pull/1121) will be merged to [master](https://github.com/ubuntu/microk8s) and released in the next MicroK8s version (maybe v1.19), you have to clone/checkout this [branch](https://github.com/sastix/microk8s/tree/feature/extend-cluster-agent-api) and install MicroK8s manually by following these [instructions](https://github.com/ubuntu/microk8s/blob/master/docs/build.md)
 ## Deploy MicroDash in MicroK8s 
 
 Under [k8s](k8s) folder you can find the [script](k8s/deploy-in-microk8s.sh) to deploy MicroDash. Open a shell and run:
@@ -100,9 +100,9 @@ Open a shell and run:
 # magic ip
 sudo ifconfig lo:1 10.0.2.2 up
 # ubuntu image
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken sastix/microdash:1.0
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 sastix/microdash:1.0
 # alpine image
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 sastix/microdash:1.0-slim
 ```
 
 ### Run the container using network host
@@ -120,9 +120,9 @@ proxy_pass https://127.0.0.1:25000/;
 then run:
 ```
 # ubuntu
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0
 # alpine
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0-slim
 ```
 
 

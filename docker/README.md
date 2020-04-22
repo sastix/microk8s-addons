@@ -21,15 +21,15 @@ docker build -t 'sastix/microdash-server:1.0-slim' -f docker/server/alpine/Docke
 - With magic ip *
 ```
 sudo ifconfig lo:1 10.0.2.2 up
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken sastix/microdash:1.0
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 sastix/microdash:1.0
 # or
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 sastix/microdash:1.0-slim
 ```
 - With network host on
 ```
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --network host sastix/microdash:1.0
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 --network host sastix/microdash:1.0
 # map your own conf
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf sastix/microdash:1.0-slim
 ```
 
 ## * magic ip
