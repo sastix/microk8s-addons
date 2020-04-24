@@ -17,8 +17,8 @@ export class ApiService {
     return throwError(error.error);
   }
 
-  get(path: string, params: HttpParams = new HttpParams(), responseType?): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/${path}`, {params, responseType})
+  get(path: string, params: HttpParams = new HttpParams(), responseType?, doNotUseBasePath?: boolean): Observable<any> {
+    return this.http.get(doNotUseBasePath == true ? `/${path}` : `${environment.apiUrl}/${path}`, {params, responseType})
       .pipe(catchError(this.formatErrors));
   }
 
@@ -33,11 +33,11 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: Object = {}, params: HttpParams = new HttpParams(), responseType?): Observable<any> {
+  post(path: string, body: Object = {}, params: HttpParams = new HttpParams(), responseType?, doNotUseBasePath?: boolean): Observable<any> {
     if(this.token) {
       body['callback'] = this.token;
     }
-    return this.http.post(`${environment.apiUrl}/${path}`, JSON.stringify(body),
+    return this.http.post(doNotUseBasePath == true ? `/${path}` : `${environment.apiUrl}/${path}`, JSON.stringify(body),
       {
         headers: new HttpHeaders({'Content-Type': 'application/json'}),
         params,

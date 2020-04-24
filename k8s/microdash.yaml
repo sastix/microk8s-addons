@@ -25,6 +25,12 @@ spec:
         imagePullPolicy: Always
         name: microdash
         env:
+          - name: HOST_ACCESS_IP
+            value: 10.0.2.2
+          - name: K8S_USER
+            value: microadmin
+          - name: K8S_USER_PASS
+            value: '$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1'
           - name: CALLBACK_TOKEN
             valueFrom:
               secretKeyRef:

@@ -31,7 +31,9 @@ COPY ./docker/ui/nginx/docker-entrypoint.sh /
 COPY --from=builder /home/app/ui/dist/microk8s-microdash-ui /usr/share/nginx/html
 RUN rm -rf /home/app/*
 EXPOSE 80
+RUN apt-get update
 # installing envsubst
 RUN apt-get -y install gettext-base
+RUN apt-get -y install curl
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
