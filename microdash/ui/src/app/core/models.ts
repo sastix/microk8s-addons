@@ -39,8 +39,8 @@ export interface Power {
 
 export interface ServiceInfo {
   name: string;
-  mode: string;
-  status: string;
+  // mode: string;
+  // status: string;
 }
 
 export interface ServiceLogs {

@@ -1,13 +1,16 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
     <div fxLayout="row" fxFill fxLayoutAlign="start center">
+<!--      <div fxFlex>-->
+<!--        <mat-slide-toggle matTooltipPosition="after"-->
+<!--        [matTooltip]="service.status === 'active' ? 'Disable' : 'Enable'"-->
+<!--        [color]="service.status === 'active' ? 'accent' : 'warn'" [checked]="service.status === 'active'"-->
+<!--        (change)="onToggleChange(service, $event);" (click)="$event.stopPropagation();">-->
+<!--          {{service.name}}-->
+<!--        </mat-slide-toggle>-->
+<!--      </div>-->
       <div fxFlex>
-        <mat-slide-toggle matTooltipPosition="after"
-        [matTooltip]="service.status === 'active' ? 'Disable' : 'Enable'"
-        [color]="service.status === 'active' ? 'accent' : 'warn'" [checked]="service.status === 'active'"
-        (change)="onToggleChange(service, $event);" (click)="$event.stopPropagation();">
-          {{service.name}}
-        </mat-slide-toggle>
+        {{service.name}}
       </div>
       <div class="mr-1" fxLayout="row" fxLayoutAlign="end">
         <button mat-icon-button
@@ -16,13 +19,6 @@
                 [matTooltip]="'Restart service'"
                 (click)="onRestartClick(service, $event);">
           <mat-icon aria-label="Restart service">refresh</mat-icon>
-        </button>
-        <button mat-icon-button
-                matTooltipPosition="right"
-                [matTooltip]="service.mode === 'enabled' ? 'Disable service' : 'Enable service'"
-                [color]="service.mode === 'enabled' ? 'accent' : 'warn'"
-                (click)="onPowerClick(service, $event)">
-          <mat-icon aria-label="Enable/Disable service">power_settings_new</mat-icon>
         </button>
       </div>
     </div>

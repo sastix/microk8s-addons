@@ -20,7 +20,7 @@ docker build -t 'sastix/microdash-server:1.0-slim' -f docker/server/alpine/Docke
 ## ui
 - With magic ip *
 ```
-sudo ifconfig lo:1 10.0.2.2 up
+sudo ifconfig lo:microk8s 10.0.2.2 up
 docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0
 # or
 docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0-slim
@@ -40,7 +40,7 @@ When in a container, we need the host ip to be something else than localhost. Th
 
 In order to set it run:
 ```
-sudo ifconfig lo:1 10.0.2.2 up
+sudo ifconfig lo:microk8s 10.0.2.2 up
 ```
 ## server
 ```

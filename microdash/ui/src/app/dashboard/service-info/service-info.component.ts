@@ -20,7 +20,7 @@ export class ServiceInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getServiceLogs();
+    //this.getServiceLogs();
   }
 
   onRestartClick(service: ServiceInfo, event: MouseEvent): void {
@@ -28,20 +28,20 @@ export class ServiceInfoComponent implements OnInit {
     this.store$.dispatch(new ServiceStoreActions.RestartServiceRequestAction(service));
   }
 
-  onPowerClick(service: ServiceInfo, event: MouseEvent): void {
-    event.stopPropagation();
-    this.dashboardService.setServiceMode(service, (service.mode !== 'enabled')).subscribe((r: ServiceInfo) => this.service = r);
-  }
+  // onPowerClick(service: ServiceInfo, event: MouseEvent): void {
+  //   event.stopPropagation();
+  //   this.dashboardService.setServiceMode(service, (service.mode !== 'enabled')).subscribe((r: ServiceInfo) => this.service = r);
+  // }
 
-  onToggleChange(service: ServiceInfo, event: MatSlideToggleChange): void {
-    this.dashboardService.setServiceStatus(service, event.checked).subscribe((r: ServiceInfo) => this.service = r);
-  }
+  // onToggleChange(service: ServiceInfo, event: MatSlideToggleChange): void {
+  //   this.dashboardService.setServiceStatus(service, event.checked).subscribe((r: ServiceInfo) => this.service = r);
+  // }
 
-  getServiceLogs(): void {
-    this.logs$ = interval(30000)
-      .pipe(
-        concatMap(() => this.dashboardService.getServiceLogs(this.service)),
-      );
-  }
+  // getServiceLogs(): void {
+  //   this.logs$ = interval(30000)
+  //     .pipe(
+  //       concatMap(() => this.dashboardService.getServiceLogs(this.service)),
+  //     );
+  // }
 
 }

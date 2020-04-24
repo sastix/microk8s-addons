@@ -39,12 +39,12 @@ export class DashboardService {
 
   setAddonStatus(name: string, enabled: boolean): Observable<AddonStatus> {
     if (enabled) {
-      return this.apiService.post('addon/enable', {addon: name}, null, 'text')
+      return this.apiService.post('configure', {'addon': [{'name': name, 'enable': true}]}, null, 'text')
         .pipe(
           map((r: HttpResponse<Object>) => Object({status: r.status, logs: r.body}))
         );
     } else {
-      return this.apiService.post('addon/disable', {addon: name}, null, 'text')
+      return this.apiService.post('configure', {'addon': [{'name': name, 'disable': true}]}, null, 'text')
         .pipe(
           map((r: HttpResponse<Object>) => Object({status: r.status, logs: r.body}))
         );
@@ -62,71 +62,71 @@ export class DashboardService {
       );
   }
 
-  setMicroK8sStatus(enabled: boolean): Observable<boolean> {
-    if (enabled) {
-      return this.apiService.post('start', {}, null, 'text')
-        .pipe(
-          mergeMap(() => this.getMicroK8sStatus())
-        );
-    } else {
-      return this.apiService.post('stop', {}, null, 'text')
-        .pipe(
-          mergeMap(() => of(false))
-        );
-    }
-
-  }
-
-  setServiceMode(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
-    if (enabled) {
-      return this.apiService.post('service/enable', {service: service.name})
-        .pipe(
-          map((r: HttpResponse<Object>) => Object({
-            name: service.name,
-            status: service.status,
-            mode: service.mode = (r.status === 200) ? 'enabled' : 'disabled',
-          }) as ServiceInfo)
-        );
-    } else {
-      return this.apiService.post('service/disable', {service: service.name})
-        .pipe(
-          map((r: HttpResponse<Object>) => Object({
-            name: service.name,
-            status: service.status,
-            mode: service.mode = (r.status === 200) ? 'disabled' : 'enabled',
-          }) as ServiceInfo)
-        );
-    }
-  }
-
-  setServiceStatus(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
-    if (enabled) {
-      return this.apiService.post('service/start', {service: service.name})
-        .pipe(
-          map((r: HttpResponse<Object>) => Object({
-            name: service.name,
-            status: service.status = (r.status === 200) ? 'active' : 'inactive',
-            mode: service.mode
-          }) as ServiceInfo)
-        );
-    } else {
-      return this.apiService.post('service/stop', {service: service.name})
-        .pipe(
-          map((r: HttpResponse<Object>) => Object({
-            name: service.name,
-            status: service.status = (r.status === 200) ? 'inactive' : 'active',
-            mode: service.mode
-          }) as ServiceInfo)
-        );
-    }
-  }
-
-  getServiceLogs(service: ServiceInfo): Observable<string> {
-    return this.apiService.post('service/logs', {service: service.name, lines: 20}, null, 'text')
-      .pipe(
-        map((r: HttpResponse<Object>) => r.body as string)
-      );
-  }
+  // setMicroK8sStatus(enabled: boolean): Observable<boolean> {
+  //   if (enabled) {
+  //     return this.apiService.post('start', {}, null, 'text')
+  //       .pipe(
+  //         mergeMap(() => this.getMicroK8sStatus())
+  //       );
+  //   } else {
+  //     return this.apiService.post('stop', {}, null, 'text')
+  //       .pipe(
+  //         mergeMap(() => of(false))
+  //       );
+  //   }
+  //
+  // }
+  //
+  // setServiceMode(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
+  //   if (enabled) {
+  //     return this.apiService.post('service/enable', {service: service.name})
+  //       .pipe(
+  //         map((r: HttpResponse<Object>) => Object({
+  //           name: service.name//,
+  //           // status: service.status,
+  //           // mode: service.mode = (r.status === 200) ? 'enabled' : 'disabled',
+  //         }) as ServiceInfo)
+  //       );
+  //   } else {
+  //     return this.apiService.post('service/disable', {service: service.name})
+  //       .pipe(
+  //         map((r: HttpResponse<Object>) => Object({
+  //           name: service.name//,
+  //           // status: service.status,
+  //           // mode: service.mode = (r.status === 200) ? 'disabled' : 'enabled',
+  //         }) as ServiceInfo)
+  //       );
+  //   }
+  // }
+  //
+  // setServiceStatus(service: ServiceInfo, enabled: boolean): Observable<ServiceInfo> {
+  //   if (enabled) {
+  //     return this.apiService.post('service/start', {service: service.name})
+  //       .pipe(
+  //         map((r: HttpResponse<Object>) => Object({
+  //           name: service.name//,
+  //           // status: service.status = (r.status === 200) ? 'active' : 'inactive',
+  //           // mode: service.mode
+  //         }) as ServiceInfo)
+  //       );
+  //   } else {
+  //     return this.apiService.post('service/stop', {service: service.name})
+  //       .pipe(
+  //         map((r: HttpResponse<Object>) => Object({
+  //           name: service.name//,
+  //           // status: service.status = (r.status === 200) ? 'inactive' : 'active',
+  //           // mode: service.mode
+  //         }) as ServiceInfo)
+  //       );
+  //   }
+  // }
+  //
+  // getServiceLogs(service: ServiceInfo): Observable<string> {
+  //   return this.apiService.post('service/logs', {service: service.name, lines: 20}, null, 'text')
+  //     .pipe(
+  //       map((r: HttpResponse<Object>) => r.body as string)
+  //     );
+  // }
 }
 
 

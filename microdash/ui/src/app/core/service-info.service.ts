@@ -16,25 +16,25 @@ export class ServiceInfoService {
   getServices(): Observable<ServiceInfo[]> {
     return this.api.post('services', { })
       .pipe(
-        mergeMap((r: HttpResponse<Object>) => from(Object.entries(r.body))),
-        map((s: Array<[string, string]>) => new Object({
-          name: s[0],
-          mode: s[1].toString().split(',')[1].trim(),
-          status: s[1].toString().split(',')[2].trim()
+        mergeMap((r: HttpResponse<Object>) => from(Object.entries(r.body['services']))),
+        map((s) => new Object({
+          name: s[1],
+          // mode: s[1].toString().split(',')[1].trim(),
+          // status: s[1].toString().split(',')[2].trim()
         }) as ServiceInfo),
         toArray()
       );
   }
 
   restartService(service: ServiceInfo): Observable<ServiceInfo> {
-    return this.api.post('service/restart', {service: service.name})
+    return this.api.post('configure', {'service': [{'name': service.name, 'restart': true}]})
       .pipe(
         map((r: HttpResponse<Object>) => {
           console.log(r);
           return Object({
-            name: service.name,
-            status: service.status = (r.status === 200) ? 'active' : 'inactive',
-            mode: service.mode
+            name: service.name//,
+            // status: service.status = (r.status === 200) ? 'active' : 'inactive',
+            // mode: service.mode
           }) as ServiceInfo;
         })
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "You must set the K8S_USER env var. Eg. '-e K8S_USER=microadmin'"
 echo "You must set the K8S_USER_PASS env var. Eg. '-e K8S_USER_PASS=<md5_value>'"
 echo ""

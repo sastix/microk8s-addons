@@ -3,14 +3,14 @@
     <h1 class="mat-h1">Dashboard</h1>
     <div fxFlex></div>
     <div *ngIf="power$ | async as power; else loadingPower">
-      <button mat-mini-fab
-              class="power-button"
-              [matTooltip]="power ? 'Stop MicroK8s' : 'Start MicroK8s'"
-              matTooltipPosition="left"
-              [color]="power ? 'accent' : 'warn'"
-              (click)="onPowerClick(!power)">
-        <mat-icon>power_settings_new</mat-icon>
-      </button>
+<!--      <button mat-mini-fab-->
+<!--              class="power-button"-->
+<!--              [matTooltip]="power ? 'Stop MicroK8s' : 'Start MicroK8s'"-->
+<!--              matTooltipPosition="left"-->
+<!--              [color]="power ? 'accent' : 'warn'"-->
+<!--              (click)="onPowerClick(!power)">-->
+<!--        <mat-icon>power_settings_new</mat-icon>-->
+<!--      </button>-->
     </div>
     <ng-template #loadingPower>
       <mat-spinner mode="indeterminate" diameter="30" color="primary"></mat-spinner>

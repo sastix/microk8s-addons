@@ -27,8 +27,8 @@ export class DashboardComponent implements OnInit {
     this.store$.dispatch(new ServiceStoreActions.GetServicesRequestAction());
   }
 
-  onPowerClick(enabled: boolean): void {
-    this.power$ = this.dashboardService.setMicroK8sStatus(enabled);
-  }
+  // onPowerClick(enabled: boolean): void {
+  //   this.power$ = this.dashboardService.setMicroK8sStatus(enabled);
+  // }
 
 }
