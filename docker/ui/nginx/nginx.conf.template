@@ -21,9 +21,9 @@ server {
 
           proxy_pass https://${HOST_ACCESS_IP}:25000/;
           proxy_read_timeout  90;
-     }
+    }
 
-     location  /k8s/version {
+    location  /k8s/version {
           proxy_set_header X-Original-URI $request_uri;
           proxy_set_header Host $host;
           proxy_set_header X-Real-IP $remote_addr;
@@ -34,7 +34,59 @@ server {
 
           proxy_pass https://${HOST_ACCESS_IP}:16443/version;
           proxy_read_timeout  90;
-     }
+    }
+
+    location  /k8s/pods {
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Authorization "Bearer ${K8S_TOKEN}";
+
+          proxy_pass https://${HOST_ACCESS_IP}:16443/api/v1/pods;
+          proxy_read_timeout  90;
+    }
+
+    location  /k8s/services {
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Authorization "Bearer ${K8S_TOKEN}";
+
+          proxy_pass https://${HOST_ACCESS_IP}:16443/api/v1/services;
+          proxy_read_timeout  90;
+    }
+
+    location  /k8s/deployments {
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Authorization "Bearer ${K8S_TOKEN}";
+
+          proxy_pass https://${HOST_ACCESS_IP}:16443/apis/apps/v1/deployments;
+          proxy_read_timeout  90;
+    }
+
+    location  /k8s/replicasets {
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Original-URI $request_uri;
+          proxy_set_header Authorization "Bearer ${K8S_TOKEN}";
+
+          proxy_pass https://${HOST_ACCESS_IP}:16443/apis/apps/v1/replicasets;
+          proxy_read_timeout  90;
+    }
 
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
