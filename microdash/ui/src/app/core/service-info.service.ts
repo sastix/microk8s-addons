@@ -18,9 +18,7 @@ export class ServiceInfoService {
       .pipe(
         mergeMap((r: HttpResponse<Object>) => from(Object.entries(r.body['services']))),
         map((s) => new Object({
-          name: s[1],
-          // mode: s[1].toString().split(',')[1].trim(),
-          // status: s[1].toString().split(',')[2].trim()
+          name: s[1]
         }) as ServiceInfo),
         toArray()
       );
@@ -32,12 +30,9 @@ export class ServiceInfoService {
         map((r: HttpResponse<Object>) => {
           console.log(r);
           return Object({
-            name: service.name//,
-            // status: service.status = (r.status === 200) ? 'active' : 'inactive',
-            // mode: service.mode
+            name: service.name
           }) as ServiceInfo;
         })
-
       );
   }
 }
