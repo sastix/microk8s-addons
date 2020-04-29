@@ -4,7 +4,136 @@
     <div fxFlex></div>
 
   </div>
-  <div *ngIf="microK8sOverview$ | async as microK8sOverview;">
-    <pre>{{microK8sOverview}}</pre>
+  <div *ngIf="microK8sOverviewObj$ | async as microK8sOverviewObj">
+    <h3>Pods</h3>
+    <table mat-table [dataSource]="microK8sOverviewObj.pods">
+      <ng-container matColumnDef="namespace">
+        <th mat-header-cell *matHeaderCellDef>Namespace</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.namespace}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ready">
+        <th mat-header-cell *matHeaderCellDef>Ready</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.ready}} </td>
+      </ng-container>
+      <ng-container matColumnDef="restarts">
+        <th mat-header-cell *matHeaderCellDef>Restart </th>
+        <td mat-cell *matCellDef="let pod"> {{pod.restarts}} </td>
+      </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.age}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="podsColumnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: podsColumnsToDisplay"></tr>
+    </table>
+
+    <h3>Services</h3>
+    <table mat-table [dataSource]="microK8sOverviewObj.services">
+      <ng-container matColumnDef="namespace">
+        <th mat-header-cell *matHeaderCellDef>Namespace</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.namespace}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cluster_ip">
+        <th mat-header-cell *matHeaderCellDef>Cluster IP</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.cluster_ip}} </td>
+      </ng-container>
+      <ng-container matColumnDef="external_ip">
+        <th mat-header-cell *matHeaderCellDef>External IP</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.external_ip}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ports">
+        <th mat-header-cell *matHeaderCellDef>Ports</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.ports}} </td>
+      </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.age}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="servicesColumnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: servicesColumnsToDisplay"></tr>
+    </table>
+
+    <h3>Deployments</h3>
+    <table mat-table [dataSource]="microK8sOverviewObj.deployments">
+      <ng-container matColumnDef="namespace">
+        <th mat-header-cell *matHeaderCellDef>Namespace</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.namespace}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ready">
+        <th mat-header-cell *matHeaderCellDef>Ready</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.ready}} </td>
+      </ng-container>
+      <ng-container matColumnDef="up_to_date">
+        <th mat-header-cell *matHeaderCellDef>Up-to-date</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.up_to_date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="available">
+        <th mat-header-cell *matHeaderCellDef>Available</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.available}} </td>
+      </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.age}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="deploymentsColumnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: deploymentsColumnsToDisplay"></tr>
+    </table>
+
+    <h3>Replica Sets</h3>
+    <table mat-table [dataSource]="microK8sOverviewObj.replicaSets">
+      <ng-container matColumnDef="namespace">
+        <th mat-header-cell *matHeaderCellDef> Namespace </th>
+        <td mat-cell *matCellDef="let pod"> {{pod.namespace}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="desired">
+        <th mat-header-cell *matHeaderCellDef>Desired</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.desired}} </td>
+      </ng-container>
+      <ng-container matColumnDef="current">
+        <th mat-header-cell *matHeaderCellDef>Current</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.current}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ready">
+        <th mat-header-cell *matHeaderCellDef>Ready</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.ready}} </td>
+      </ng-container>
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let pod"> {{pod.age}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="replicaSetsColumnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: replicaSetsColumnsToDisplay"></tr>
+    </table>
+
   </div>
+    <div *ngIf="microK8sOverview$ | async as microK8sOverview;">
+      <h3>JSON output</h3>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+          Expand
+        </mat-expansion-panel-header>
+        <pre>{{microK8sOverview}}</pre>
+      </mat-expansion-panel>
+    </div>
+
 </div>

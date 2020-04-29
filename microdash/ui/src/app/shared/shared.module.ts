@@ -12,19 +12,21 @@ import {AboutComponent} from "../about/about.component";
 import {OverviewComponent} from "../overview/overview.component";
 import {MyServicesComponent} from "../myservices/myservices.component";
 import { LogsComponent } from './logs/logs.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
   declarations: [NavigationComponent, LoadingComponent, AboutComponent, OverviewComponent, MyServicesComponent, LogsComponent],
-  imports: [
-    CommonModule,
-    CoreModule,
-    LayoutModule,
-    FlexLayoutModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    RouterModule,
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        LayoutModule,
+        FlexLayoutModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatTableModule,
+    ],
     exports: [
         CoreModule,
         CommonModule,

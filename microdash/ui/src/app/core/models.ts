@@ -39,8 +39,6 @@ export interface Power {
 
 export interface ServiceInfo {
   name: string;
-  // mode: string;
-  // status: string;
 }
 
 export interface ServiceLogs {
@@ -53,4 +51,45 @@ export interface Version {
   webconsole: string;
 }
 
+export interface PodView {
+  namespace: string;
+  name: string;
+  ready: string;
+  restarts: number;
+  age: string;
+}
 
+export interface ServiceView {
+  namespace: string;
+  name: string;
+  type: string;
+  cluster_ip: string;
+  external_ip: number;
+  ports: string;
+  age: string;
+}
+
+export interface DeploymentView {
+  namespace: string;
+  name: string;
+  ready: string;
+  up_to_date: number;
+  available: number;
+  age: string;
+}
+
+export interface ReplicaSetView {
+  namespace: string;
+  name: string;
+  desired: number;
+  current: number;
+  ready: number;
+  age: string;
+}
+
+export interface K8sOverview {
+  pods: PodView[];
+  services: ServiceView[];
+  deployments: DeploymentView[];
+  replicaSets: ReplicaSetView[];
+}
