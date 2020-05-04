@@ -98,16 +98,16 @@ sudo echo "xyztoken" > /var/snap/microk8s/current/credentials/callback-token.txt
 Open a shell and run:
 ```bash
 # magic ip
-sudo ifconfig lo:microk8s 10.0.2.2 up
+sudo ifconfig lo:microk8s 10.0.1.1 up
 # find K8S_TOKEN value to enable k8s api access
 SECRET_NAME=$(microk8s.kubectl get secrets | grep ^default | cut -f1 -d ' ')
 K8S_TOKEN=$(microk8s.kubectl describe secret $SECRET_NAME | grep -E '^token' | cut -f2 -d':' | tr -d " ")
 echo $K8S_TOKEN
 
 # ubuntu image
-docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0
+docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0
 # alpine image
-docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0-slim
+docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0-slim
 ```
 
 ### Run the container using network host
@@ -116,7 +116,7 @@ You must map your own NGINX config file (or use existing) through docker volume.
 
 Use  [docker/ui/nginx/nginx.conf](docker/ui/nginx/nginx.conf) and change:
 ```
-proxy_pass https://10.0.2.2:25000/;
+proxy_pass https://10.0.1.1:25000/;
 ```
 to (or your local ip):
 ```
@@ -125,9 +125,9 @@ proxy_pass https://127.0.0.1:25000/;
 then run:
 ```
 # ubuntu
-docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0
+docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0
 # alpine
-docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0-slim
+docker run -p 80:80 -e K8S_TOKEN='<K8S_TOKEN>' -e CALLBACK_TOKEN=xyztoken -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/microdash.conf sastix/microdash:1.0-slim
 ```
 
 

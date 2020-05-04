@@ -16,7 +16,7 @@ else
     echo "$TOKEN" > ${CALLBACK_TOKEN_FILE}
 fi
 # setup the magic ip so pod/container can see host
-sudo ifconfig lo:microk8s 10.0.2.2 up
+sudo ifconfig lo:microk8s 10.0.1.1 up
 KUBECTL="microk8s.kubectl"
 CHECK_NAMESPACE=$($KUBECTL get namespaces)
 if ! echo $CHECK_NAMESPACE | grep "microdash" >/dev/null

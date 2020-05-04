@@ -23,27 +23,27 @@ docker build -t 'sastix/microdash-server:1.0-slim' -f docker/server/alpine/Docke
 SECRET_NAME=$(microk8s.kubectl get secrets | grep ^default | cut -f1 -d ' ')
 K8S_TOKEN=$(microk8s.kubectl describe secret $SECRET_NAME | grep -E '^token' | cut -f2 -d':' | tr -d " ")
 echo $K8S_TOKEN
-sudo ifconfig lo:microk8s 10.0.2.2 up
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0
+sudo ifconfig lo:microk8s 10.0.1.1 up
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0
 # or
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' sastix/microdash:1.0-slim
 ```
 - With network host on
 ```
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host sastix/microdash:1.0
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken -e K8S_TOKEN='$K8S_TOKEN' -e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host sastix/microdash:1.0
 # map your own conf
-docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --e K8S_TOKEN='$K8S_TOKEN' e HOST_ACCESS_IP=10.0.2.2 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf sastix/microdash:1.0-slim
+docker run -p 80:80 -e CALLBACK_TOKEN=xyztoken --e K8S_TOKEN='$K8S_TOKEN' e HOST_ACCESS_IP=10.0.1.1 -e K8S_USER='microadmin' -e K8S_USER_PASS='$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1' --network host -v /<path-to-project>/microk8s-addons/docker/ui/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf sastix/microdash:1.0-slim
 ```
 
 ## * magic ip
 
 MicroDash will check with reverse proxy the host ip. When running locally this could be localhost or 127.0.0.1
 
-When in a container, we need the host ip to be something else than localhost. This is the reason of introducing the magic ip: 10.0.2.2
+When in a container, we need the host ip to be something else than localhost. This is the reason of introducing the magic ip: 10.0.1.1
 
 In order to set it run:
 ```
-sudo ifconfig lo:microk8s 10.0.2.2 up
+sudo ifconfig lo:microk8s 10.0.1.1 up
 ```
 ## server
 ```
