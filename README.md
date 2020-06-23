@@ -28,6 +28,12 @@ microk8s.kubectl get all -A
 Point the browser to this ip, eg:
 http://10.152.183.98
 
+When prompted for basic auth use:
+```
+user: microadmin
+password: MicroK8s
+```
+
 ## Run in development mode
 
 Firstly create the callback token file to validate against the cluster-agent api running in MicroK8s:

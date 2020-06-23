@@ -26,11 +26,20 @@ spec:
         name: microdash
         env:
           - name: HOST_ACCESS_IP
-            value: 10.0.1.1
+            valueFrom:
+              secretKeyRef:
+                name: cb-token
+                key: host_access_ip
           - name: K8S_USER
-            value: microadmin
+            valueFrom:
+              secretKeyRef:
+                name: cb-token
+                key: microdash_user
           - name: K8S_USER_PASS
-            value: '$apr1$029KDYcF$OWgQy3KmUTum5je0T1Ooi1'
+            valueFrom:
+              secretKeyRef:
+                name: cb-token
+                key: microdash_pass
           - name: CALLBACK_TOKEN
             valueFrom:
               secretKeyRef:
