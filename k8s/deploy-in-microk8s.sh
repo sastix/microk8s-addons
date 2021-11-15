@@ -87,4 +87,4 @@ echo "The username to login from your browser is: $MICRODASH_USER"
 echo "password: $MICRODASH_PASS"
 echo "MicroDash enabled"
 BROWSER_IP=$($KUBECTL get services -n microdash | grep microdash-service | awk '{print $3}')
-echo "Point your browser at $BROWSER_IP and when prompted enter user '$MICRODASH_USER' and the selected password. If nothing selected, default is this 'product name'"
+echo "Point your browser at http://$BROWSER_IP and when prompted enter user '$MICRODASH_USER' and the selected password. If nothing selected, default is MicroK8s"
